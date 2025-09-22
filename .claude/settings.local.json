@@ -78,7 +78,8 @@
       "Bash(pnmp:*)",
       "WebFetch(domain:www.ideanconsulting.com)",
       "WebFetch(domain:azure.microsoft.com)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(move \"code-enhanced - color 1.html\" \"DocDirector-Dashboard-Versions/01-Original-Enhanced/\")"
     ],
     "deny": [],
     "ask": [],
