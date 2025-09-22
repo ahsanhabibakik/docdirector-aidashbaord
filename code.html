@@ -8,28 +8,55 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <style type="text/tailwindcss">
     :root {
+      /* DocDirector Brand Colors */
       --background: #FFFFFF;
       --foreground: #0F172A;
       --card: #FFFFFF;
       --card-foreground: #0F172A;
       --popover: #FFFFFF;
       --popover-foreground: #0F172A;
-      --primary: #5A4FCF;
+      --primary: #4F46E5;
+      --primary-light: #6366F1;
+      --primary-dark: #3730A3;
       --primary-foreground: #FFFFFF;
-      --secondary: #F8F8FF;
+      --secondary: #F8FAFC;
       --secondary-foreground: #0F172A;
-      --muted: #F8F8FF;
+      --muted: #F1F5F9;
       --muted-foreground: #64748B;
-      --accent: #F8F8FF;
+      --accent: #F8FAFC;
       --accent-foreground: #0F172A;
       --destructive: #EF4444;
       --destructive-foreground: #F9FAFB;
-      --border: #E5E3FD;
-      --input: #E5E3FD;
-      --ring: #5A4FCF;
-      --radius: 0.5rem;
+      --border: #E2E8F0;
+      --input: #E2E8F0;
+      --ring: #4F46E5;
+      --radius: 1rem;
       --hover: #e5e3fd;
       --active: #c9c5fa;
+
+      /* Spacing System */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      /* DocDirector Secondary Colors */
+      --orange: #FF8A4C;
+      --orange-light: #FFB380;
+      --orange-dark: #E5661A;
+      --green: #10B981;
+      --green-light: #34D399;
+      --green-dark: #047857;
+      --cyan: #06B6D4;
+      --cyan-light: #22D3EE;
+      --cyan-dark: #0891B2;
+      --purple: #8B5CF6;
+      --purple-light: #A78BFA;
+      --purple-dark: #7C3AED;
     }
     .dark {
       --background: #1A1B23;
@@ -81,6 +108,118 @@
       background-color: var(--active);
     }
 
+    /* Enhanced UI Components */
+    .w-70 {
+      width: 280px;
+    }
+
+    .lg\\:ml-70 {
+      margin-left: 280px;
+    }
+
+    @media (max-width: 1024px) {
+      .lg\\:ml-70 {
+        margin-left: 0;
+      }
+    }
+
+    .nav-item {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px;
+    }
+
+    .nav-item:hover {
+      transform: translateX(4px);
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .dashboard-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 16px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .dashboard-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .card-icon-container {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.4);
+    }
+
+    /* Enhanced header */
+    .header-enhanced {
+      height: 72px;
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-input-enhanced {
+      padding: 12px 16px 12px 44px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .search-input-enhanced:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      outline: none;
+    }
+
+    /* Focus indicators for accessibility */
+    .focusable:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     /* Improved responsiveness */
     @media (max-width: 1280px) {
       .max-w-7xl {
@@ -119,32 +258,32 @@
   </head>
 <body class="bg-background">
 <div class="flex min-h-screen">
-<aside id="sidebar" class="w-64 flex-shrink-0 bg-background border-r border-border fixed lg:fixed lg:flex flex-col z-20 h-screen top-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+<aside id="sidebar" class="w-70 flex-shrink-0 bg-background border-r border-border fixed lg:fixed lg:flex flex-col z-20 h-screen top-0 left-0 transform -translate-x-full lg:translate-x-0 transition-all duration-300 ease-in-out shadow-lg lg:shadow-none">
 <div class="h-16 flex items-center px-6 border-b border-border">
 <h1 class="text-xl font-bold text-foreground">AI Dashboard</h1>
 </div>
 <nav class="flex-1 px-4 py-6 space-y-2">
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium bg-secondary text-secondary-foreground hover:bg-hover active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium bg-secondary text-secondary-foreground focusable" href="#" aria-current="page">
 <span class="material-symbols-outlined">home</span>
           Home
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
 <span class="material-symbols-outlined">description</span>
           My Documents
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
 <span class="material-symbols-outlined">auto_awesome</span>
           Templates
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
 <span class="material-symbols-outlined">hub</span>
           Integrations
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
 <span class="material-symbols-outlined">menu_book</span>
           Knowledge Base
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
+<a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
 <span class="material-symbols-outlined">settings</span>
           Settings
         </a>
@@ -157,15 +296,15 @@
 </div>
 </div>
 </aside>
-<div class="flex-1 flex flex-col lg:ml-64">
-<header class="h-16 flex items-center justify-between px-6 border-b border-border bg-background sticky top-0 z-10">
+<div class="flex-1 flex flex-col lg:ml-70">
+<header class="header-enhanced flex items-center justify-between px-8 sticky top-0 z-10">
 <div class="flex items-center gap-4">
 <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md hover:bg-secondary">
 <span class="material-symbols-outlined">menu</span>
 </button>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">search</span>
-<input class="bg-secondary border-none rounded-md pl-10 pr-4 py-2 text-sm w-full max-w-sm focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background" placeholder="Search documents..." type="text"/>
+<input class="search-input-enhanced bg-background focusable" placeholder="Search documents, templates, ideas..." type="text" aria-label="Search documents and templates"/>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -188,7 +327,7 @@
 <p class="text-muted-foreground">Here's what you can do today.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-<div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div class="dashboard-card bg-card border border-border p-6 flex flex-col justify-between">
 <div>
 <div class="mb-4 bg-orange-200 dark:bg-orange-800 p-3 rounded-lg inline-flex">
 <span class="material-symbols-outlined text-3xl font-bold" style="color: #C2410C; font-variation-settings: 'FILL' 1;">business_center</span>
@@ -196,9 +335,9 @@
 <h3 class="text-lg font-semibold text-card-foreground">Start-up Pack</h3>
 <p class="mt-1 text-sm text-muted-foreground">Vetted template to create T1 documents for a startup.</p>
 </div>
-<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Get Started <span aria-hidden="true">→</span></button>
+<button class="btn-primary mt-6 self-start" aria-label="Start with startup template">Get Started <span aria-hidden="true">→</span></button>
 </div>
-<div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div class="dashboard-card bg-card border border-border p-6 flex flex-col justify-between">
 <div>
 <div class="mb-4 bg-green-200 dark:bg-green-800 p-3 rounded-lg inline-flex">
 <span class="material-symbols-outlined text-3xl font-bold" style="color: #047857; font-variation-settings: 'FILL' 1;">dashboard_customize</span>
@@ -206,9 +345,9 @@
 <h3 class="text-lg font-semibold text-card-foreground">Generate using Templates</h3>
 <p class="mt-1 text-sm text-muted-foreground">Professional templates for instant, high-quality results.</p>
 </div>
-<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Browse Templates <span aria-hidden="true">→</span></button>
+<button class="btn-primary mt-6 self-start" aria-label="Browse all templates">Browse Templates <span aria-hidden="true">→</span></button>
 </div>
-<div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div class="dashboard-card bg-card border border-border p-6 flex flex-col justify-between">
 <div>
 <div class="mb-4 bg-blue-200 dark:bg-blue-800 p-3 rounded-lg inline-flex">
 <span class="material-symbols-outlined text-3xl font-bold" style="color: #1E40AF; font-variation-settings: 'FILL' 1;">build</span>
@@ -216,9 +355,9 @@
 <h3 class="text-lg font-semibold text-card-foreground">Build your own template</h3>
 <p class="mt-1 text-sm text-muted-foreground">Create desired documents and save prompts as a template.</p>
 </div>
-<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Build Now <span aria-hidden="true">→</span></button>
+<button class="btn-primary mt-6 self-start" aria-label="Build custom template">Build Now <span aria-hidden="true">→</span></button>
 </div>
-<div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div class="dashboard-card bg-card border border-border p-6 flex flex-col justify-between">
 <div>
 <div class="mb-4 bg-purple-200 dark:bg-purple-800 p-3 rounded-lg inline-flex">
 <span class="material-symbols-outlined text-3xl font-bold" style="color: #6D28D9; font-variation-settings: 'FILL' 1;">emoji_objects</span>
@@ -226,9 +365,9 @@
 <h3 class="text-lg font-semibold text-card-foreground">Ideas List</h3>
 <p class="mt-1 text-sm text-muted-foreground">Get inspiration for new document templates.</p>
 </div>
-<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Explore Ideas <span aria-hidden="true">→</span></button>
+<button class="btn-primary mt-6 self-start" aria-label="Explore template ideas">Explore Ideas <span aria-hidden="true">→</span></button>
 </div>
-<div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div class="dashboard-card bg-card border border-border p-6 flex flex-col justify-between">
 <div>
 <div class="mb-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg inline-flex">
 <span class="material-symbols-outlined text-3xl font-bold" style="color: #1F2937; font-variation-settings: 'FILL' 1;">folder</span>
@@ -236,7 +375,7 @@
 <h3 class="text-lg font-semibold text-card-foreground">My Documents</h3>
 <p class="mt-1 text-sm text-muted-foreground">Access and manage all your generated documents.</p>
 </div>
-<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">View Documents <span aria-hidden="true">→</span></button>
+<button class="btn-primary mt-6 self-start" aria-label="View all documents">View Documents <span aria-hidden="true">→</span></button>
 </div>
 </div>
 <div>
