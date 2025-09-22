@@ -123,6 +123,36 @@
       }
     }
 
+    /* Sidebar overflow fixes */
+    aside {
+      display: flex;
+      flex-direction: column;
+      min-height: 0; /* Allow flex children to shrink */
+    }
+
+    aside nav {
+      min-height: 0; /* Allow nav to shrink */
+      flex: 1 1 0%; /* Allow growth and shrinkage */
+    }
+
+    /* Custom scrollbar for sidebar navigation */
+    aside nav::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    aside nav::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    aside nav::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    aside nav::-webkit-scrollbar-thumb:hover {
+      background: var(--muted-foreground);
+    }
+
     .nav-item {
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: var(--radius); /* DocDirector standard radius */
@@ -439,7 +469,7 @@
   </head>
 <body class="bg-background">
 <div class="flex min-h-screen">
-<aside id="sidebar" class="w-70 flex-shrink-0 bg-background border-r border-border fixed lg:fixed lg:flex flex-col z-20 h-screen top-0 left-0 transform -translate-x-full lg:translate-x-0 transition-all duration-300 ease-in-out shadow-lg lg:shadow-none">
+<aside id="sidebar" class="w-70 flex-shrink-0 bg-background border-r border-border fixed lg:fixed lg:flex flex-col z-20 h-screen top-0 left-0 transform -translate-x-full lg:translate-x-0 transition-all duration-300 ease-in-out shadow-lg lg:shadow-none overflow-hidden">
 <div class="h-16 flex items-center px-6 border-b border-border">
 <div class="flex items-center gap-3">
         <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -448,7 +478,7 @@
         <h1 class="text-xl font-bold text-foreground">DocDirector</h1>
       </div>
 </div>
-<nav class="flex-1 px-4 py-6 space-y-2">
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
 <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium bg-secondary text-secondary-foreground focusable" href="#" aria-current="page">
 <span class="material-symbols-outlined">home</span>
           Home
@@ -474,11 +504,11 @@
           Settings
         </a>
 </nav>
-<div class="px-4 py-6 mt-auto">
-<div class="p-4 rounded-lg bg-secondary">
+<div class="px-4 py-4 mt-auto flex-shrink-0">
+<div class="p-3 rounded-lg bg-secondary">
 <h4 class="font-semibold text-sm text-secondary-foreground mb-1">Unlock DocDirector Pro</h4>
-<p class="text-xs text-muted-foreground mb-3">Advanced automation, unlimited templates, and enterprise integrations.</p>
-<button class="w-full bg-primary text-primary-foreground text-sm font-medium py-2 rounded-md hover:bg-primary/90">Upgrade</button>
+<p class="text-xs text-muted-foreground mb-2">Advanced automation, unlimited templates, and enterprise integrations.</p>
+<button class="w-full bg-primary text-primary-foreground text-xs font-medium py-2 rounded-md hover:bg-primary/90 transition-colors">Upgrade</button>
 </div>
 </div>
 </aside>
