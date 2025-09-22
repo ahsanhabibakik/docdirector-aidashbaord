@@ -14,41 +14,45 @@
       --card-foreground: #0F172A;
       --popover: #FFFFFF;
       --popover-foreground: #0F172A;
-      --primary: #6D28D9;
-      --primary-foreground: #F9FAFB;
-      --secondary: #F1F5F9;
+      --primary: #5A4FCF;
+      --primary-foreground: #FFFFFF;
+      --secondary: #F8F8FF;
       --secondary-foreground: #0F172A;
-      --muted: #F1F5F9;
+      --muted: #F8F8FF;
       --muted-foreground: #64748B;
-      --accent: #F1F5F9;
+      --accent: #F8F8FF;
       --accent-foreground: #0F172A;
       --destructive: #EF4444;
       --destructive-foreground: #F9FAFB;
-      --border: #E2E8F0;
-      --input: #E2E8F0;
-      --ring: #6D28D9;
+      --border: #E5E3FD;
+      --input: #E5E3FD;
+      --ring: #5A4FCF;
       --radius: 0.5rem;
+      --hover: #e5e3fd;
+      --active: #c9c5fa;
     }
     .dark {
-      --background: #020617;
+      --background: #1A1B23;
       --foreground: #F8FAFC;
-      --card: #020617;
+      --card: #1A1B23;
       --card-foreground: #F8FAFC;
-      --popover: #020617;
+      --popover: #1A1B23;
       --popover-foreground: #F8FAFC;
-      --primary: #8B5CF6;
-      --primary-foreground: #F9FAFB;
-      --secondary: #1E293B;
+      --primary: #7C6EE8;
+      --primary-foreground: #FFFFFF;
+      --secondary: #2A2D3A;
       --secondary-foreground: #F8FAFC;
-      --muted: #1E293B;
+      --muted: #2A2D3A;
       --muted-foreground: #94A3B8;
-      --accent: #1E293B;
+      --accent: #2A2D3A;
       --accent-foreground: #F8FAFC;
       --destructive: #F87171;
       --destructive-foreground: #F9FAFB;
-      --border: #1E293B;
-      --input: #1E293B;
-      --ring: #8B5CF6;
+      --border: #2A2D3A;
+      --input: #2A2D3A;
+      --ring: #7C6EE8;
+      --hover: #3A3E5A;
+      --active: #4A4F6F;
     }
     body {
         font-family: 'Inter', sans-serif;
@@ -66,6 +70,15 @@
 <style>
     body {
       min-height: max(884px, 100dvh);
+    }
+
+    /* DocDirector hover effects */
+    .hover\\:bg-hover:hover {
+      background-color: var(--hover);
+    }
+
+    .active\\:bg-active:active {
+      background-color: var(--active);
     }
 
     /* Improved responsiveness */
@@ -111,27 +124,27 @@
 <h1 class="text-xl font-bold text-foreground">AI Dashboard</h1>
 </div>
 <nav class="flex-1 px-4 py-6 space-y-2">
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium bg-secondary text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium bg-secondary text-secondary-foreground hover:bg-hover active:bg-active" href="#">
 <span class="material-symbols-outlined">home</span>
           Home
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
 <span class="material-symbols-outlined">description</span>
           My Documents
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
 <span class="material-symbols-outlined">auto_awesome</span>
           Templates
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
 <span class="material-symbols-outlined">hub</span>
           Integrations
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
 <span class="material-symbols-outlined">menu_book</span>
           Knowledge Base
         </a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-hover hover:text-secondary-foreground active:bg-active" href="#">
 <span class="material-symbols-outlined">settings</span>
           Settings
         </a>
@@ -177,8 +190,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
 <div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
 <div>
-<div class="mb-4 bg-yellow-100 dark:bg-yellow-900/50 p-3 rounded-lg inline-flex">
-<span class="material-symbols-outlined text-3xl font-bold" style="color: #d97706;">rocket_launch</span>
+<div class="mb-4 bg-orange-50 dark:bg-orange-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-3xl font-bold" style="color: #FF9966;">rocket_launch</span>
 </div>
 <h3 class="text-lg font-semibold text-card-foreground">Start-up Pack</h3>
 <p class="mt-1 text-sm text-muted-foreground">Vetted template to create T1 documents for a startup.</p>
@@ -187,8 +200,8 @@
 </div>
 <div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
 <div>
-<div class="mb-4 bg-green-100 dark:bg-green-900/50 p-3 rounded-lg inline-flex">
-<span class="material-symbols-outlined text-3xl font-bold" style="color: #059669;">auto_awesome_mosaic</span>
+<div class="mb-4 bg-emerald-50 dark:bg-emerald-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-3xl font-bold" style="color: #10B981;">auto_awesome_mosaic</span>
 </div>
 <h3 class="text-lg font-semibold text-card-foreground">Generate using Templates</h3>
 <p class="mt-1 text-sm text-muted-foreground">Professional templates for instant, high-quality results.</p>
@@ -197,8 +210,8 @@
 </div>
 <div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
 <div>
-<div class="mb-4 bg-blue-100 dark:bg-blue-900/50 p-3 rounded-lg inline-flex">
-<span class="material-symbols-outlined text-3xl font-bold" style="color: #2563eb;">add_circle</span>
+<div class="mb-4 bg-cyan-50 dark:bg-cyan-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-3xl font-bold" style="color: #06B6D4;">add_circle</span>
 </div>
 <h3 class="text-lg font-semibold text-card-foreground">Build your own template</h3>
 <p class="mt-1 text-sm text-muted-foreground">Create desired documents and save prompts as a template.</p>
@@ -207,8 +220,8 @@
 </div>
 <div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
 <div>
-<div class="mb-4 bg-purple-100 dark:bg-purple-900/50 p-3 rounded-lg inline-flex">
-<span class="material-symbols-outlined text-3xl font-bold" style="color: #7c3aed;">lightbulb</span>
+<div class="mb-4 bg-purple-50 dark:bg-purple-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-3xl font-bold" style="color: #C084FC;">lightbulb</span>
 </div>
 <h3 class="text-lg font-semibold text-card-foreground">Ideas List</h3>
 <p class="mt-1 text-sm text-muted-foreground">Get inspiration for new document templates.</p>
@@ -217,8 +230,8 @@
 </div>
 <div class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between hover:shadow-lg transition-shadow">
 <div>
-<div class="mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg inline-flex">
-<span class="material-symbols-outlined text-3xl font-bold" style="color: #4b5563;">folder_open</span>
+<div class="mb-4 bg-slate-50 dark:bg-slate-700 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-3xl font-bold" style="color: #64748B;">folder_open</span>
 </div>
 <h3 class="text-lg font-semibold text-card-foreground">My Documents</h3>
 <p class="mt-1 text-sm text-muted-foreground">Access and manage all your generated documents.</p>
