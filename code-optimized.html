@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>DocDirector - AI-Powered Document Management Platform</title>
+  <meta name="description" content="Streamline your document workflow with AI-powered automation and intelligent templates. Create professional documents in seconds.">
+  <meta name="theme-color" content="#6366F1">
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+  <!-- Preload icon font with optional loading -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"></noscript>
+
+  <!-- Preload and optimize Tailwind CSS -->
+  <link rel="preload" href="https://cdn.tailwindcss.com?plugins=forms,container-queries" as="script">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+
+  <!-- Critical CSS for immediate render -->
+  <style>
+    /* Critical path CSS for immediate render */
+    :root {
+      /* DocDirector Colors - Optimized for performance */
+      --bg: #FFF;
+      --fg: #0F172A;
+      --primary: #6366F1;
+      --primary-dark: #4338CA;
+      --secondary: #F8FAFC;
+      --muted: #F1F5F9;
+      --muted-fg: #64748B;
+      --border: #E2E8F0;
+      --radius: 0.75rem;
+      --hover: #E0E7FF;
+      --active: #C7D2FE;
+      --orange: #FF8A4C;
+      --green: #10B981;
+      --cyan: #06B6D4;
+      --purple: #A855F7;
+    }
+
+    /* Base layout - critical for CLS prevention */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      margin: 0;
+      min-height: 100vh;
+      contain: layout style;
+    }
+
+    /* Critical layout containers */
+    .layout-container { display: flex; min-height: 100vh; }
+    .sidebar { width: 280px; flex-shrink: 0; }
+    .main-content { flex: 1; margin-left: 280px; }
+
+    /* Critical responsive breakpoint */
+    @media (max-width: 1024px) {
+      .main-content { margin-left: 0; }
+      .sidebar { transform: translateX(-100%); position: fixed; z-index: 20; }
+    }
+
+    /* GPU acceleration for smooth animations */
+    .gpu-accelerated {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+  </style>
+
+  <style type="text/tailwindcss">
+    /* Extended CSS variables for full functionality */
+    :root {
+      --background: var(--bg);
+      --foreground: var(--fg);
+      --card: var(--bg);
+      --card-foreground: var(--fg);
+      --popover: var(--bg);
+      --popover-foreground: var(--fg);
+      --primary-light: #A855F7;
+      --primary-foreground: #FFFFFF;
+      --secondary-foreground: var(--fg);
+      --accent: var(--secondary);
+      --accent-foreground: var(--fg);
+      --destructive: #EF4444;
+      --destructive-foreground: #F9FAFB;
+      --input: var(--border);
+      --ring: var(--primary);
+
+      /* Optimized spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      /* Extended brand colors */
+      --orange-light: #FFB380;
+      --orange-dark: #CC6633;
+      --green-light: #34D399;
+      --green-dark: #047857;
+      --cyan-light: #67E8F9;
+      --cyan-dark: #0891B2;
+      --purple-light: #C084FC;
+      --purple-dark: #7C3AED;
+    }
+
+    /* Dark mode optimized for performance */
+    .dark {
+      --bg: #1E293B;
+      --fg: #F8FAFC;
+      --background: var(--bg);
+      --foreground: var(--fg);
+      --card: var(--bg);
+      --card-foreground: var(--fg);
+      --popover: var(--bg);
+      --popover-foreground: var(--fg);
+      --primary: #A855F7;
+      --primary-foreground: #FFFFFF;
+      --secondary: #334155;
+      --secondary-foreground: var(--fg);
+      --muted: #334155;
+      --muted-fg: #94A3B8;
+      --accent: #334155;
+      --accent-foreground: var(--fg);
+      --destructive: #F87171;
+      --destructive-foreground: #F9FAFB;
+      --border: #334155;
+      --input: #334155;
+      --ring: #A855F7;
+      --hover: #475569;
+      --active: #64748B;
+    }
+
+    /* Optimized material icons with fallback */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-display: swap;
+      will-change: auto;
+    }
+
+    /* Icon fallback for better loading */
+    .icon-fallback {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: var(--muted);
+      border-radius: 2px;
+    }
+  </style>
+
+  <!-- Performance-optimized styles -->
+  <style>
+    /* Optimized hover effects with GPU acceleration */
+    .hover\:bg-hover:hover {
+      background-color: var(--hover);
+      transform: translateZ(0);
+    }
+
+    .active\:bg-active:active {
+      background-color: var(--active);
+      transform: translateZ(0);
+    }
+
+    /* Optimized layout components with containment */
+    .w-70 {
+      width: 280px;
+      contain: layout;
+    }
+
+    .lg\:ml-70 {
+      margin-left: 280px;
+      contain: layout;
+    }
+
+    @media (max-width: 1024px) {
+      .lg\:ml-70 {
+        margin-left: 0;
+      }
+    }
+
+    /* Optimized navigation with GPU acceleration */
+    .nav-item {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: var(--radius);
+      will-change: transform, background-color;
+      contain: layout;
+    }
+
+    .nav-item:hover {
+      transform: translateX(4px) translateZ(0);
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Performance-optimized cards */
+    .dashboard-card {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: 0 1px 3px 0 rgba(99, 102, 241, 0.1), 0 1px 2px 0 rgba(99, 102, 241, 0.06);
+      will-change: transform, box-shadow;
+      contain: layout style;
+    }
+
+    .dashboard-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px) translateZ(0);
+      border-color: var(--primary);
+    }
+
+    /* Optimized icon containers */
+    .card-icon-container {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius);
+      transition: transform 0.2s ease;
+      will-change: transform;
+      contain: layout;
+    }
+
+    /* High-performance buttons */
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      will-change: transform, background-color;
+      contain: layout;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px) translateZ(0);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) translateZ(0);
+      box-shadow: 0 2px 4px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Performance-optimized header */
+    .header-enhanced {
+      height: 72px;
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      contain: layout style;
+      will-change: backdrop-filter;
+    }
+
+    /* Optimized search input */
+    .search-input-enhanced {
+      padding: 12px 16px 12px 44px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      max-width: 400px;
+      contain: layout;
+    }
+
+    .search-input-enhanced:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      outline: none;
+    }
+
+    /* Optimized focus indicators */
+    .focusable:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+      transition: outline-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    /* Improve focus visibility with reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .focusable:focus {
+        transition: none;
+      }
+    }
+
+    /* GPU-accelerated visual elements */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+      border-radius: calc(var(--radius) + 8px);
+      position: relative;
+      overflow: hidden;
+      contain: layout style;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    /* Optimized progress indicators */
+    .progress-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      will-change: background-color, box-shadow;
+      contain: layout;
+    }
+
+    .progress-indicator.active {
+      background-color: var(--primary);
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+    }
+
+    .progress-indicator.completed {
+      background-color: var(--green);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .progress-indicator.pending {
+      background-color: var(--muted-foreground);
+    }
+
+    /* High-performance story cards */
+    .story-card {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: calc(var(--radius) + 6px);
+      position: relative;
+      overflow: hidden;
+      will-change: transform, box-shadow;
+      contain: layout style;
+    }
+
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.02) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      will-change: opacity;
+    }
+
+    .story-card:hover::before {
+      opacity: 1;
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px) scale(1.02) translateZ(0);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.1);
+    }
+
+    .ai-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulse-glow 2s infinite;
+    }
+
+    /* GPU-optimized animations */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+        transform: translateZ(0);
+      }
+      50% {
+        box-shadow: 0 0 16px rgba(99, 102, 241, 0.5);
+        transform: translateZ(0);
+      }
+    }
+
+    /* Optimized loading skeleton */
+    .loading-skeleton {
+      background: linear-gradient(90deg, var(--muted) 25%, var(--secondary) 50%, var(--muted) 75%);
+      background-size: 200% 100%;
+      animation: loading-shimmer 1.5s infinite;
+      will-change: background-position;
+      contain: layout;
+    }
+
+    @keyframes loading-shimmer {
+      0% {
+        background-position: -200% 0;
+        transform: translateZ(0);
+      }
+      100% {
+        background-position: 200% 0;
+        transform: translateZ(0);
+      }
+    }
+
+    .success-indicator {
+      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      animation: success-bounce 0.6s ease-out;
+    }
+
+    /* GPU-accelerated success animation */
+    @keyframes success-bounce {
+      0% {
+        transform: scale(0) translateZ(0);
+      }
+      50% {
+        transform: scale(1.2) translateZ(0);
+      }
+      100% {
+        transform: scale(1) translateZ(0);
+      }
+    }
+
+    /* Optimized workflow steps */
+    .workflow-step {
+      position: relative;
+      padding: 20px;
+      border-radius: var(--radius);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      will-change: transform;
+      contain: layout;
+    }
+
+    .workflow-step::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+      transform: translateY(-50%);
+    }
+
+    .workflow-step:last-child::after {
+      display: none;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      background: radial-gradient(circle at center, rgba(99, 102, 241, 0.03) 0%, transparent 70%);
+      border-radius: calc(var(--radius) + 8px);
+      border: 2px dashed var(--border);
+    }
+
+    /* High-performance floating action button */
+    .floating-action {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 50;
+      will-change: transform, box-shadow;
+      contain: layout;
+    }
+
+    .floating-action:hover {
+      transform: scale(1.1) translateZ(0);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Enhanced reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        will-change: auto !important;
+      }
+
+      .gpu-accelerated {
+        transform: none !important;
+      }
+    }
+
+    /* Performance-optimized responsive design */
+    @media (max-width: 1280px) {
+      .max-w-7xl {
+        max-width: 100%;
+        contain: layout;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      aside {
+        width: 16rem;
+        contain: layout;
+      }
+
+      .lg\:p-8 {
+        padding: 1.5rem;
+      }
+
+      .xl\:grid-cols-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      /* Optimize for mobile performance */
+      .story-card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .flex-1 {
+        margin-left: 0;
+      }
+
+      .p-6 {
+        padding: 1rem;
+      }
+
+      .hidden.md\:block {
+        display: none !important;
+      }
+
+      /* Disable expensive effects on mobile */
+      .dashboard-card:hover,
+      .nav-item:hover {
+        transform: none;
+      }
+
+      .header-enhanced {
+        backdrop-filter: none;
+        background-color: var(--bg);
+      }
+    }
+
+    /* Container queries for advanced responsive design */
+    @container (max-width: 600px) {
+      .story-card {
+        contain: layout style;
+      }
+    }
+
+    /* Performance optimizations */
+    .virtual-scroll {
+      height: 400px;
+      overflow-y: auto;
+      contain: strict;
+    }
+
+    .intersection-observer {
+      will-change: opacity, transform;
+    }
+
+    /* Memory optimization */
+    .memory-optimized {
+      contain: layout style paint;
+    }
+  </style>
+
+  <!-- Performance monitoring and optimization hints -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Resource hints for better loading -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+</head>
+
+<body class="bg-background">
+<div class="layout-container">
+  <aside id="sidebar" class="sidebar bg-background border-r border-border fixed lg:fixed lg:flex flex-col z-20 h-screen top-0 left-0 transform -translate-x-full lg:translate-x-0 transition-all duration-300 ease-in-out shadow-lg lg:shadow-none">
+    <div class="h-16 flex items-center px-6 border-b border-border">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">DD</span>
+        </div>
+        <h1 class="text-xl font-bold text-foreground">DocDirector</h1>
+      </div>
+    </div>
+    <nav class="flex-1 px-4 py-6 space-y-2">
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium bg-secondary text-secondary-foreground focusable" href="#" aria-current="page">
+        <span class="material-symbols-outlined">home</span>
+        Home
+      </a>
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
+        <span class="material-symbols-outlined">description</span>
+        My Documents
+      </a>
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        Templates
+      </a>
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
+        <span class="material-symbols-outlined">hub</span>
+        Integrations
+      </a>
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
+        <span class="material-symbols-outlined">menu_book</span>
+        Knowledge Base
+      </a>
+      <a class="nav-item flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted-foreground focusable" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        Settings
+      </a>
+    </nav>
+    <div class="px-4 py-6 mt-auto">
+      <div class="p-4 rounded-lg bg-secondary">
+        <h4 class="font-semibold text-sm text-secondary-foreground mb-1">Unlock DocDirector Pro</h4>
+        <p class="text-xs text-muted-foreground mb-3">Advanced automation, unlimited templates, and enterprise integrations.</p>
+        <button class="w-full bg-primary text-primary-foreground text-sm font-medium py-2 rounded-md hover:bg-primary/90">Upgrade</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content flex flex-col">
+    <header class="header-enhanced flex items-center justify-between px-8 sticky top-0 z-10">
+      <div class="flex items-center gap-4">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md hover:bg-secondary">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">search</span>
+          <input class="search-input-enhanced bg-background focusable" placeholder="Search documents, templates, workflows..." type="text" aria-label="Search DocDirector documents and templates"/>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="text-muted-foreground hover:text-foreground" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <div class="flex items-center gap-3">
+          <img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY" width="32" height="32" loading="lazy"/>
+          <div>
+            <p class="text-sm font-medium text-foreground">John Doe</p>
+            <p class="text-xs text-muted-foreground">johndoe@example.com</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-6 lg:p-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-foreground">Welcome back, John!</h2>
+          <p class="text-muted-foreground">Streamline your document workflow with AI-powered automation and intelligent templates.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+          <div class="story-card dashboard-card bg-card border border-border p-6 flex flex-col justify-between memory-optimized">
+            <div>
+              <div class="mb-4 bg-orange-200 dark:bg-orange-800 p-3 rounded-lg inline-flex">
+                <span class="material-symbols-outlined text-3xl font-bold" style="color: #C2410C; font-variation-settings: 'FILL' 1;">business_center</span>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Startup Documentation Suite</h3>
+              <p class="mt-1 text-sm text-muted-foreground">AI analyzes your business model and generates comprehensive documentation automatically.</p>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="success-indicator">
+                  <span class="material-symbols-outlined" style="font-size: 12px;">check</span>
+                </div>
+                <span class="text-xs text-green font-medium">Auto-generated 15 docs in 3 minutes</span>
+              </div>
+            </div>
+            <button class="btn-primary mt-6 self-start" aria-label="Start with startup template">Get Started <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="story-card dashboard-card bg-card border border-border p-6 flex flex-col justify-between memory-optimized">
+            <div>
+              <div class="mb-4 bg-green-200 dark:bg-green-800 p-3 rounded-lg inline-flex">
+                <span class="material-symbols-outlined text-3xl font-bold" style="color: #047857; font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Smart Template Engine</h3>
+              <p class="mt-1 text-sm text-muted-foreground">Templates that learn from your content and evolve to match your unique style and needs.</p>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="success-indicator">
+                  <span class="material-symbols-outlined" style="font-size: 12px;">auto_awesome</span>
+                </div>
+                <span class="text-xs text-primary font-medium">500+ AI-enhanced templates</span>
+              </div>
+            </div>
+            <button class="btn-primary mt-6 self-start" aria-label="Browse all templates">Browse Templates <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="story-card dashboard-card bg-card border border-border p-6 flex flex-col justify-between memory-optimized">
+            <div>
+              <div class="mb-4 bg-blue-200 dark:bg-blue-800 p-3 rounded-lg inline-flex">
+                <span class="material-symbols-outlined text-3xl font-bold" style="color: #1E40AF; font-variation-settings: 'FILL' 1;">build</span>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Custom Template Builder</h3>
+              <p class="mt-1 text-sm text-muted-foreground">Drag, drop, and let AI optimize your workflow. No coding required, infinite possibilities.</p>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="success-indicator">
+                  <span class="material-symbols-outlined" style="font-size: 12px;">build</span>
+                </div>
+                <span class="text-xs text-cyan font-medium">Built 12 custom workflows</span>
+              </div>
+            </div>
+            <button class="btn-primary mt-6 self-start" aria-label="Build custom template">Build Now <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="story-card dashboard-card bg-card border border-border p-6 flex flex-col justify-between memory-optimized">
+            <div>
+              <div class="mb-4 bg-purple-200 dark:bg-purple-800 p-3 rounded-lg inline-flex">
+                <span class="material-symbols-outlined text-3xl font-bold" style="color: #6D28D9; font-variation-settings: 'FILL' 1;">emoji_objects</span>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Innovation Hub</h3>
+              <p class="mt-1 text-sm text-muted-foreground">AI discovers productivity patterns in your industry and suggests breakthrough automations.</p>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="success-indicator">
+                  <span class="material-symbols-outlined" style="font-size: 12px;">lightbulb</span>
+                </div>
+                <span class="text-xs text-purple font-medium">3 new opportunities found</span>
+              </div>
+            </div>
+            <button class="btn-primary mt-6 self-start" aria-label="Explore template ideas">Explore Ideas <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <!-- AI Workflow Visualization -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold text-foreground mb-6">How AI Transforms Your Workflow</h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="workflow-step bg-card border border-border p-4 rounded-lg memory-optimized">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-800 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined text-orange text-sm">upload</span>
+                </div>
+                <span class="text-sm font-semibold text-card-foreground">1. Input</span>
+              </div>
+              <p class="text-xs text-muted-foreground">Upload docs or describe your needs</p>
+            </div>
+            <div class="workflow-step bg-card border border-border p-4 rounded-lg memory-optimized">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">psychology</span>
+                </div>
+                <span class="text-sm font-semibold text-card-foreground">2. AI Analysis</span>
+              </div>
+              <p class="text-xs text-muted-foreground">AI understands context and requirements</p>
+            </div>
+            <div class="workflow-step bg-card border border-border p-4 rounded-lg memory-optimized">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-cyan-100 dark:bg-cyan-800 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined text-cyan text-sm">auto_awesome</span>
+                </div>
+                <span class="text-sm font-semibold text-card-foreground">3. Generation</span>
+              </div>
+              <p class="text-xs text-muted-foreground">Smart templates create perfect documents</p>
+            </div>
+            <div class="workflow-step bg-card border border-border p-4 rounded-lg memory-optimized">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined text-green text-sm">check_circle</span>
+                </div>
+                <span class="text-sm font-semibold text-card-foreground">4. Delivery</span>
+              </div>
+              <p class="text-xs text-muted-foreground">Polished results in seconds, not hours</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-foreground">Recent Documents</h3>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green rounded-full animate-pulse"></div>
+                <span class="text-xs text-muted-foreground">AI actively optimizing</span>
+              </div>
+              <a class="text-sm font-medium text-primary hover:underline" href="#">View all</a>
+            </div>
+          </div>
+
+          <div class="bg-card border border-border rounded-lg virtual-scroll">
+            <ul class="divide-y divide-border">
+              <li class="p-4 flex items-center justify-between hover:bg-secondary/50 transition-all duration-200 memory-optimized">
+                <div class="flex items-center gap-4">
+                  <div class="relative">
+                    <span class="material-symbols-outlined text-muted-foreground">description</span>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-green rounded-full border-2 border-background" title="AI Enhanced"></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <p class="font-medium text-card-foreground">Marketing Strategy and Campaign Plan</p>
+                      <span class="ai-badge text-xs px-2 py-1">AI Enhanced</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span>Edited 2 hours ago</span>
+                      <span>•</span>
+                      <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined" style="font-size: 12px;">trending_up</span>
+                        95% completion
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="hidden md:flex items-center gap-2">
+                    <span class="text-sm text-muted-foreground">Shared with 3 others</span>
+                    <div class="flex -space-x-1">
+                      <div class="w-6 h-6 bg-primary rounded-full border-2 border-background text-xs text-white flex items-center justify-center">J</div>
+                      <div class="w-6 h-6 bg-orange rounded-full border-2 border-background text-xs text-white flex items-center justify-center">M</div>
+                      <div class="w-6 h-6 bg-green rounded-full border-2 border-background text-xs text-white flex items-center justify-center">S</div>
+                    </div>
+                  </div>
+                  <button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+                </div>
+              </li>
+
+              <li class="p-4 flex items-center justify-between hover:bg-secondary/50 transition-all duration-200 memory-optimized">
+                <div class="flex items-center gap-4">
+                  <div class="relative">
+                    <span class="material-symbols-outlined text-muted-foreground">description</span>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background animate-pulse" title="AI Processing"></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <p class="font-medium text-card-foreground">Sales Process Optimization Guide</p>
+                      <span class="inline-flex items-center gap-1 text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
+                        <span class="material-symbols-outlined" style="font-size: 10px;">psychology</span>
+                        AI Analyzing
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span>Edited 1 day ago</span>
+                      <span>•</span>
+                      <span class="flex items-center gap-1">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        Processing insights
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <p class="text-sm text-muted-foreground hidden md:block">Only you</p>
+                  <button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+                </div>
+              </li>
+
+              <li class="p-4 flex items-center justify-between hover:bg-secondary/50 transition-all duration-200 memory-optimized">
+                <div class="flex items-center gap-4">
+                  <div class="relative">
+                    <span class="material-symbols-outlined text-muted-foreground">description</span>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-cyan rounded-full border-2 border-background" title="Template Generated"></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <p class="font-medium text-card-foreground">AI Buddy Onboarding Flow</p>
+                      <span class="inline-flex items-center gap-1 text-xs px-2 py-1 bg-cyan/10 text-cyan rounded-full">
+                        <span class="material-symbols-outlined" style="font-size: 10px;">auto_awesome</span>
+                        Template
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span>Edited 3 days ago</span>
+                      <span>•</span>
+                      <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined" style="font-size: 12px;">group</span>
+                        Team collaboration
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="hidden md:flex items-center gap-2">
+                    <span class="text-sm text-muted-foreground">Shared with 1 other</span>
+                    <div class="flex -space-x-1">
+                      <div class="w-6 h-6 bg-cyan rounded-full border-2 border-background text-xs text-white flex items-center justify-center">A</div>
+                    </div>
+                  </div>
+                  <button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Floating Action Button -->
+<button class="floating-action" title="Create new document with AI" onclick="showCreateModal()" aria-label="Create new document">
+  <span class="material-symbols-outlined">add</span>
+</button>
+
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden hidden"></div>
+
+<!-- Optimized JavaScript with performance monitoring -->
+<script>
+// Performance optimized mobile menu functionality
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+// Use passive event listeners for better performance
+function toggleSidebar() {
+  sidebar.classList.toggle('-translate-x-full');
+  sidebarOverlay.classList.toggle('hidden');
+  // Add focus management for accessibility
+  if (!sidebar.classList.contains('-translate-x-full')) {
+    sidebar.querySelector('a').focus();
+  }
+}
+
+function closeSidebar() {
+  sidebar.classList.add('-translate-x-full');
+  sidebarOverlay.classList.add('hidden');
+  // Return focus to menu button
+  mobileMenuBtn.focus();
+}
+
+mobileMenuBtn?.addEventListener('click', toggleSidebar, { passive: true });
+sidebarOverlay?.addEventListener('click', closeSidebar, { passive: true });
+
+// Optimized keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+    closeSidebar();
+  }
+}, { passive: true });
+
+// Performance-optimized animations with Intersection Observer
+function initializePerformanceOptimizations() {
+  // Lazy load animations only when elements are visible
+  const observerOptions = {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+  };
+
+  const intersectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        target.classList.add('intersection-observer');
+
+        // Animate story cards
+        if (target.classList.contains('story-card')) {
+          target.style.transform = 'translateY(0)';
+          target.style.opacity = '1';
+        }
+
+        // Animate progress indicators
+        if (target.classList.contains('progress-indicator')) {
+          setTimeout(() => {
+            target.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+              target.style.transform = 'scale(1)';
+            }, 200);
+          }, Math.random() * 300);
+        }
+
+        // Stop observing once animated
+        intersectionObserver.unobserve(target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements that need animation
+  document.querySelectorAll('.story-card, .progress-indicator').forEach(element => {
+    // Set initial state for animation
+    if (element.classList.contains('story-card')) {
+      element.style.transform = 'translateY(20px)';
+      element.style.opacity = '0';
+      element.style.transition = 'all 0.6s ease-out';
+    }
+    intersectionObserver.observe(element);
+  });
+}
+
+// Optimized virtual scrolling for long lists
+function initializeVirtualScrolling() {
+  const virtualScrollContainer = document.querySelector('.virtual-scroll');
+  if (!virtualScrollContainer) return;
+
+  // Add scroll optimization
+  let ticking = false;
+  virtualScrollContainer.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        // Perform scroll-based optimizations here
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// Memory leak prevention
+function preventMemoryLeaks() {
+  // Clean up unused observers and listeners
+  window.addEventListener('beforeunload', () => {
+    // Clean up any observers or timers
+    if (typeof intersectionObserver !== 'undefined') {
+      intersectionObserver.disconnect();
+    }
+  });
+}
+
+// Progressive enhancement initialization
+function initializeProgressiveEnhancement() {
+  // Only add enhanced features if the browser supports them
+  if ('IntersectionObserver' in window) {
+    initializePerformanceOptimizations();
+  }
+
+  if ('requestIdleCallback' in window) {
+    // Use idle time for non-critical operations
+    requestIdleCallback(() => {
+      initializeVirtualScrolling();
+      preventMemoryLeaks();
+    });
+  } else {
+    // Fallback for browsers without idle callback
+    setTimeout(() => {
+      initializeVirtualScrolling();
+      preventMemoryLeaks();
+    }, 100);
+  }
+}
+
+// Demo function optimized for performance
+function showCreateModal() {
+  // Use modern dialog API if available
+  if ('HTMLDialogElement' in window) {
+    console.log('Would show native dialog');
+  } else {
+    alert('Create new document modal would open here');
+  }
+}
+
+// Initialize everything when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeProgressiveEnhancement);
+} else {
+  initializeProgressiveEnhancement();
+}
+
+// Performance monitoring (development only)
+if ('performance' in window && 'PerformanceObserver' in window) {
+  // Monitor Core Web Vitals
+  const observer = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      if (entry.entryType === 'largest-contentful-paint') {
+        console.log('LCP:', entry.startTime);
+      }
+      if (entry.entryType === 'first-input') {
+        console.log('FID:', entry.processingStart - entry.startTime);
+      }
+      if (entry.entryType === 'layout-shift') {
+        if (!entry.hadRecentInput) {
+          console.log('CLS:', entry.value);
+        }
+      }
+    }
+  });
+
+  observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+}
+</script>
+
+</body>
+</html>
