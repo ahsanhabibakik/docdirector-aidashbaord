@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocDirector - Interactive States</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      /* ========================================
+         DOCDIRECTOR BRAND COLORS
+         Total: 50 color variations across 6 palettes
+         WCAG 2.1 accessibility compliant
+         ======================================== */
+
+      /* PRIMARY COLORS - Blue Palette (10 variations) */
+      --brand-blue-light: #E8E9FF;           /* Subtle background tint */
+      --brand-blue-light-hover: #D4D7FF;     /* Interactive light state */
+      --brand-blue-light-active: #C1C5FF;    /* Active light state */
+      --brand-blue-normal: #5D5FEF;          /* Main brand blue */
+      --brand-blue-normal-hover: #4A4DE6;    /* Primary hover state */
+      --brand-blue-normal-active: #373ADD;   /* Primary active state */
+      --brand-blue-dark: #2527D4;            /* Darker brand blue */
+      --brand-blue-dark-hover: #1419CB;      /* Dark hover state */
+      --brand-blue-dark-active: #0C0FC2;     /* Dark active state */
+      --brand-blue-darker: #0509B9;          /* Deepest blue */
+
+      /* SECONDARY COLORS - Orange Palette (10 variations) */
+      --brand-orange-light: #FFF4E6;         /* Warm background */
+      --brand-orange-light-hover: #FFE9CC;   /* Light orange hover */
+      --brand-orange-light-active: #FFDFB3;  /* Light orange active */
+      --brand-orange-normal: #FF9500;        /* Vibrant orange */
+      --brand-orange-normal-hover: #E6850A;  /* Orange hover */
+      --brand-orange-normal-active: #CC7614; /* Orange active */
+      --brand-orange-dark: #B3661F;          /* Deep orange */
+      --brand-orange-dark-hover: #995729;    /* Dark orange hover */
+      --brand-orange-dark-active: #804733;   /* Dark orange active */
+      --brand-orange-darker: #66383D;        /* Darkest orange */
+
+      /* SECONDARY COLORS - Green Palette (10 variations) */
+      --brand-green-light: #E6FFF4;          /* Fresh background */
+      --brand-green-light-hover: #CCFFE9;    /* Light green hover */
+      --brand-green-light-active: #B3FFDF;   /* Light green active */
+      --brand-green-normal: #00CC66;         /* Vibrant green */
+      --brand-green-normal-hover: #0AB85C;   /* Green hover */
+      --brand-green-normal-active: #14A352;  /* Green active */
+      --brand-green-dark: #1F8F47;           /* Deep green */
+      --brand-green-dark-hover: #297A3D;     /* Dark green hover */
+      --brand-green-dark-active: #336633;    /* Dark green active */
+      --brand-green-darker: #3D5229;         /* Darkest green */
+
+      /* SECONDARY COLORS - Pale Cyan Palette (10 variations) */
+      --brand-cyan-light: #E6FCFF;           /* Cool background */
+      --brand-cyan-light-hover: #CCF9FF;     /* Light cyan hover */
+      --brand-cyan-light-active: #B3F6FF;    /* Light cyan active */
+      --brand-cyan-normal: #33E6FF;          /* Bright cyan */
+      --brand-cyan-normal-hover: #29D9F0;    /* Cyan hover */
+      --brand-cyan-normal-active: #1FCCE1;   /* Cyan active */
+      --brand-cyan-dark: #14BFD2;            /* Deep cyan */
+      --brand-cyan-dark-hover: #0AB2C3;      /* Dark cyan hover */
+      --brand-cyan-dark-active: #00A5B4;     /* Dark cyan active */
+      --brand-cyan-darker: #0098A5;          /* Darkest cyan */
+
+      /* SECONDARY COLORS - Purple Palette (10 variations) */
+      --brand-purple-light: #F9E6FF;         /* Soft background */
+      --brand-purple-light-hover: #F3CCFF;   /* Light purple hover */
+      --brand-purple-light-active: #EDB3FF;  /* Light purple active */
+      --brand-purple-normal: #CC33FF;        /* Vibrant purple */
+      --brand-purple-normal-hover: #B829E6;  /* Purple hover */
+      --brand-purple-normal-active: #A31FCC; /* Purple active */
+      --brand-purple-dark: #8F14B3;          /* Deep purple */
+      --brand-purple-dark-hover: #7A0A99;    /* Dark purple hover */
+      --brand-purple-dark-active: #660080;   /* Dark purple active */
+      --brand-purple-darker: #520066;        /* Darkest purple */
+
+      /* NEUTRAL COLORS - Dark Palette (10 variations) */
+      --brand-dark-50: #F8F9FA;              /* Lightest gray */
+      --brand-dark-100: #E9ECEF;             /* Very light gray */
+      --brand-dark-200: #DEE2E6;             /* Light gray */
+      --brand-dark-300: #CED4DA;             /* Medium light gray */
+      --brand-dark-400: #ADB5BD;             /* Medium gray */
+      --brand-dark-500: #6C757D;             /* Mid gray */
+      --brand-dark-600: #495057;             /* Dark gray */
+      --brand-dark-700: #343A40;             /* Darker gray */
+      --brand-dark-800: #212529;             /* Very dark gray */
+      --brand-dark-900: #000000;             /* Pure black */
+
+      /* ========================================
+         SEMANTIC COLOR MAPPING - INTERACTIVE STATES
+         Enhanced focus on hover, active, and focus states
+         ======================================== */
+
+      /* Light Theme */
+      --background: #FFFFFF;
+      --foreground: var(--brand-dark-800);
+      --card: #FFFFFF;
+      --card-foreground: var(--brand-dark-800);
+      --popover: #FFFFFF;
+      --popover-foreground: var(--brand-dark-800);
+      --primary: var(--brand-blue-normal);
+      --primary-foreground: #FFFFFF;
+      --primary-hover: var(--brand-blue-normal-hover);
+      --primary-active: var(--brand-blue-normal-active);
+      --secondary: var(--brand-blue-light);
+      --secondary-foreground: var(--brand-blue-dark);
+      --secondary-hover: var(--brand-blue-light-hover);
+      --secondary-active: var(--brand-blue-light-active);
+      --muted: var(--brand-dark-100);
+      --muted-foreground: var(--brand-dark-500);
+      --accent: var(--brand-blue-light);
+      --accent-foreground: var(--brand-blue-dark);
+      --destructive: #EF4444;
+      --destructive-foreground: #FFFFFF;
+      --border: var(--brand-dark-200);
+      --input: var(--brand-dark-200);
+      --ring: var(--brand-blue-normal);
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      /* Dark Theme */
+      --background: var(--brand-dark-900);
+      --foreground: var(--brand-dark-50);
+      --card: var(--brand-dark-800);
+      --card-foreground: var(--brand-dark-50);
+      --popover: var(--brand-dark-800);
+      --popover-foreground: var(--brand-dark-50);
+      --primary: var(--brand-blue-normal);
+      --primary-foreground: #FFFFFF;
+      --primary-hover: var(--brand-blue-normal-hover);
+      --primary-active: var(--brand-blue-normal-active);
+      --secondary: var(--brand-dark-700);
+      --secondary-foreground: var(--brand-dark-50);
+      --secondary-hover: var(--brand-dark-600);
+      --secondary-active: var(--brand-dark-500);
+      --muted: var(--brand-dark-700);
+      --muted-foreground: var(--brand-dark-400);
+      --accent: var(--brand-blue-dark);
+      --accent-foreground: var(--brand-blue-light);
+      --destructive: #F87171;
+      --destructive-foreground: #FFFFFF;
+      --border: var(--brand-dark-700);
+      --input: var(--brand-dark-700);
+      --ring: var(--brand-blue-normal);
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 500,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    .icon-bold {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 600,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    .sticky-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Enhanced Interactive States */
+    .interactive-card {
+      transition: all 0.2s ease-in-out;
+      border: 2px solid transparent;
+    }
+
+    .interactive-card:hover {
+      background-color: var(--secondary);
+      border-color: var(--secondary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(93, 95, 239, 0.15);
+    }
+
+    .interactive-card:active {
+      background-color: var(--secondary-active);
+      transform: translateY(0);
+      box-shadow: 0 4px 15px rgba(93, 95, 239, 0.2);
+    }
+
+    .nav-item {
+      transition: all 0.15s ease-in-out;
+    }
+
+    .nav-item:hover {
+      background-color: var(--secondary-hover) !important;
+      color: var(--secondary-foreground) !important;
+      transform: translateX(4px);
+    }
+
+    .nav-item:active {
+      background-color: var(--secondary-active) !important;
+      transform: translateX(2px);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(93, 95, 239, 0.3);
+    }
+
+    .btn-primary:active {
+      background-color: var(--primary-active);
+      transform: translateY(0);
+    }
+
+    .input-enhanced {
+      transition: all 0.15s ease-in-out;
+      border: 2px solid transparent;
+    }
+
+    .input-enhanced:focus {
+      background-color: var(--secondary);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background">
+<div class="flex min-h-screen">
+<aside class="w-64 flex-shrink-0 bg-background border-r border-border hidden lg:flex flex-col sticky-sidebar">
+<div class="h-16 flex items-center px-6 border-b border-border">
+<h1 class="text-xl font-bold text-foreground">DocDirector</h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-2">
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium bg-secondary text-secondary-foreground" href="#">
+<span class="material-symbols-outlined icon-bold">home</span>
+          Home
+        </a>
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground" href="#">
+<span class="material-symbols-outlined icon-bold">auto_awesome</span>
+          Templates
+        </a>
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground" href="#">
+<span class="material-symbols-outlined icon-bold">menu_book</span>
+          Knowledge Base
+        </a>
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground" href="#">
+<span class="material-symbols-outlined icon-bold">hub</span>
+          Integrations
+        </a>
+<a class="nav-item flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground" href="#">
+<span class="material-symbols-outlined icon-bold">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="p-4 rounded-lg bg-secondary">
+<h4 class="font-semibold text-sm text-secondary-foreground mb-1">Upgrade your plan</h4>
+<p class="text-xs text-muted-foreground mb-3">Get more credits and unlock premium features.</p>
+<button class="btn-primary w-full text-sm font-medium py-2 rounded-md">Upgrade</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="h-16 flex items-center justify-between px-6 border-b border-border bg-background/95 backdrop-blur-sm sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">search</span>
+<input class="input-enhanced bg-secondary border-none rounded-md pl-10 pr-4 py-2 text-sm w-64" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-muted-foreground hover:text-foreground transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-foreground">Welcome back, John!</h2>
+<p class="text-muted-foreground">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="interactive-card bg-card border border-border rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="mb-4 p-3 rounded-lg inline-flex" style="background-color: var(--brand-orange-normal);">
+<span class="material-symbols-outlined text-white text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Start-up Pack</h3>
+<p class="mt-1 text-sm text-muted-foreground">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start transition-all duration-150">Get Started <span aria-hidden="true">→</span></button>
+</div>
+<div class="interactive-card bg-card border border-border rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="mb-4 p-3 rounded-lg inline-flex" style="background-color: var(--brand-blue-normal);">
+<span class="material-symbols-outlined text-white text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Build your own template</h3>
+<p class="mt-1 text-sm text-muted-foreground">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start transition-all duration-150">Build Now <span aria-hidden="true">→</span></button>
+</div>
+<div class="interactive-card bg-card border border-border rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="mb-4 p-3 rounded-lg inline-flex" style="background-color: var(--brand-purple-normal);">
+<span class="material-symbols-outlined text-white text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Ideas</h3>
+<p class="mt-1 text-sm text-muted-foreground">Get inspiration for new document templates.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start transition-all duration-150">Explore Ideas <span aria-hidden="true">→</span></button>
+</div>
+<div class="interactive-card bg-card border border-border rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="mb-4 p-3 rounded-lg inline-flex" style="background-color: var(--brand-green-normal);">
+<span class="material-symbols-outlined text-white text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Generate using Templates</h3>
+<p class="mt-1 text-sm text-muted-foreground">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start transition-all duration-150">Browse Templates <span aria-hidden="true">→</span></button>
+</div>
+<div class="interactive-card bg-card border border-border rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="mb-4 p-3 rounded-lg inline-flex" style="background-color: var(--brand-cyan-normal);">
+<span class="material-symbols-outlined text-white text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">My Documents</h3>
+<p class="mt-1 text-sm text-muted-foreground">Access and manage all your generated documents.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start transition-all duration-150">View Documents <span aria-hidden="true">→</span></button>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-foreground">Recent Documents</h3>
+<a class="text-sm font-medium text-primary hover:underline transition-all duration-150" href="#">View all</a>
+</div>
+<div class="bg-card border border-border rounded-lg">
+<ul class="divide-y divide-border">
+<li class="p-4 flex items-center justify-between hover:bg-secondary-hover transition-colors duration-150">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm text-muted-foreground">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Shared with 3 others</p>
+<button class="btn-primary px-4 py-2 text-sm font-semibold border border-primary rounded-md">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary-hover transition-colors duration-150">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Sales Process Optimization Guide</p>
+<p class="text-sm text-muted-foreground">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Only you</p>
+<button class="btn-primary px-4 py-2 text-sm font-semibold border border-primary rounded-md">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary-hover transition-colors duration-150">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">AI Buddy Onboarding Flow</p>
+<p class="text-sm text-muted-foreground">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Shared with 1 other</p>
+<button class="btn-primary px-4 py-2 text-sm font-semibold border border-primary rounded-md">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary-hover transition-colors duration-150">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Q4 Financial Projections</p>
+<p class="text-sm text-muted-foreground">Edited 5 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Only you</p>
+<button class="btn-primary px-4 py-2 text-sm font-semibold border border-primary rounded-md">Open</button>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

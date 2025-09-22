@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocDirector - Dark Theme</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      /* ========================================
+         DOCDIRECTOR BRAND COLORS
+         Total: 50 color variations across 6 palettes
+         WCAG 2.1 accessibility compliant
+         ======================================== */
+
+      /* PRIMARY COLORS - Blue Palette (10 variations) */
+      --brand-blue-light: #E8E9FF;           /* Subtle background tint */
+      --brand-blue-light-hover: #D4D7FF;     /* Interactive light state */
+      --brand-blue-light-active: #C1C5FF;    /* Active light state */
+      --brand-blue-normal: #5D5FEF;          /* Main brand blue */
+      --brand-blue-normal-hover: #4A4DE6;    /* Primary hover state */
+      --brand-blue-normal-active: #373ADD;   /* Primary active state */
+      --brand-blue-dark: #2527D4;            /* Darker brand blue */
+      --brand-blue-dark-hover: #1419CB;      /* Dark hover state */
+      --brand-blue-dark-active: #0C0FC2;     /* Dark active state */
+      --brand-blue-darker: #0509B9;          /* Deepest blue */
+
+      /* SECONDARY COLORS - Orange Palette (10 variations) */
+      --brand-orange-light: #FFF4E6;         /* Warm background */
+      --brand-orange-light-hover: #FFE9CC;   /* Light orange hover */
+      --brand-orange-light-active: #FFDFB3;  /* Light orange active */
+      --brand-orange-normal: #FF9500;        /* Vibrant orange */
+      --brand-orange-normal-hover: #E6850A;  /* Orange hover */
+      --brand-orange-normal-active: #CC7614; /* Orange active */
+      --brand-orange-dark: #B3661F;          /* Deep orange */
+      --brand-orange-dark-hover: #995729;    /* Dark orange hover */
+      --brand-orange-dark-active: #804733;   /* Dark orange active */
+      --brand-orange-darker: #66383D;        /* Darkest orange */
+
+      /* SECONDARY COLORS - Green Palette (10 variations) */
+      --brand-green-light: #E6FFF4;          /* Fresh background */
+      --brand-green-light-hover: #CCFFE9;    /* Light green hover */
+      --brand-green-light-active: #B3FFDF;   /* Light green active */
+      --brand-green-normal: #00CC66;         /* Vibrant green */
+      --brand-green-normal-hover: #0AB85C;   /* Green hover */
+      --brand-green-normal-active: #14A352;  /* Green active */
+      --brand-green-dark: #1F8F47;           /* Deep green */
+      --brand-green-dark-hover: #297A3D;     /* Dark green hover */
+      --brand-green-dark-active: #336633;    /* Dark green active */
+      --brand-green-darker: #3D5229;         /* Darkest green */
+
+      /* SECONDARY COLORS - Pale Cyan Palette (10 variations) */
+      --brand-cyan-light: #E6FCFF;           /* Cool background */
+      --brand-cyan-light-hover: #CCF9FF;     /* Light cyan hover */
+      --brand-cyan-light-active: #B3F6FF;    /* Light cyan active */
+      --brand-cyan-normal: #33E6FF;          /* Bright cyan */
+      --brand-cyan-normal-hover: #29D9F0;    /* Cyan hover */
+      --brand-cyan-normal-active: #1FCCE1;   /* Cyan active */
+      --brand-cyan-dark: #14BFD2;            /* Deep cyan */
+      --brand-cyan-dark-hover: #0AB2C3;      /* Dark cyan hover */
+      --brand-cyan-dark-active: #00A5B4;     /* Dark cyan active */
+      --brand-cyan-darker: #0098A5;          /* Darkest cyan */
+
+      /* SECONDARY COLORS - Purple Palette (10 variations) */
+      --brand-purple-light: #F9E6FF;         /* Soft background */
+      --brand-purple-light-hover: #F3CCFF;   /* Light purple hover */
+      --brand-purple-light-active: #EDB3FF;  /* Light purple active */
+      --brand-purple-normal: #CC33FF;        /* Vibrant purple */
+      --brand-purple-normal-hover: #B829E6;  /* Purple hover */
+      --brand-purple-normal-active: #A31FCC; /* Purple active */
+      --brand-purple-dark: #8F14B3;          /* Deep purple */
+      --brand-purple-dark-hover: #7A0A99;    /* Dark purple hover */
+      --brand-purple-dark-active: #660080;   /* Dark purple active */
+      --brand-purple-darker: #520066;        /* Darkest purple */
+
+      /* NEUTRAL COLORS - Dark Palette (10 variations) */
+      --brand-dark-50: #F8F9FA;              /* Lightest gray */
+      --brand-dark-100: #E9ECEF;             /* Very light gray */
+      --brand-dark-200: #DEE2E6;             /* Light gray */
+      --brand-dark-300: #CED4DA;             /* Medium light gray */
+      --brand-dark-400: #ADB5BD;             /* Medium gray */
+      --brand-dark-500: #6C757D;             /* Mid gray */
+      --brand-dark-600: #495057;             /* Dark gray */
+      --brand-dark-700: #343A40;             /* Darker gray */
+      --brand-dark-800: #212529;             /* Very dark gray */
+      --brand-dark-900: #000000;             /* Pure black */
+    }
+
+    .dark {
+      /* ========================================
+         DARK THEME OPTIMIZED BRAND COLORS
+         Enhanced for dark environments
+         ======================================== */
+
+      /* Dark Theme Foundation */
+      --background: linear-gradient(135deg, #0F0F23, var(--brand-dark-900));
+      --foreground: var(--brand-dark-50);
+      --card: var(--brand-dark-800);
+      --card-foreground: var(--brand-dark-50);
+      --popover: var(--brand-dark-700);
+      --popover-foreground: var(--brand-dark-50);
+      --primary: var(--brand-blue-normal);
+      --primary-foreground: #FFFFFF;
+      --primary-hover: var(--brand-blue-normal-hover);
+      --primary-active: var(--brand-blue-normal-active);
+      --secondary: var(--brand-dark-700);
+      --secondary-foreground: var(--brand-dark-100);
+      --secondary-hover: var(--brand-dark-600);
+      --secondary-active: var(--brand-dark-500);
+      --muted: var(--brand-dark-800);
+      --muted-foreground: var(--brand-dark-400);
+      --accent: var(--brand-blue-dark);
+      --accent-foreground: var(--brand-blue-light);
+      --success: var(--brand-green-normal);
+      --success-foreground: #FFFFFF;
+      --warning: var(--brand-orange-normal);
+      --warning-foreground: #FFFFFF;
+      --destructive: #F87171;
+      --destructive-foreground: #FFFFFF;
+      --border: var(--brand-dark-600);
+      --input: var(--brand-dark-700);
+      --ring: var(--brand-blue-normal);
+      --radius: 0.75rem;
+
+      /* Dark Sidebar System */
+      --sidebar-bg: linear-gradient(180deg, #1a1a2e, var(--brand-dark-800));
+      --sidebar-border: var(--brand-blue-dark);
+      --sidebar-header: var(--brand-blue-normal);
+      --sidebar-text: var(--brand-dark-200);
+      --sidebar-active: var(--brand-blue-normal);
+      --sidebar-hover: var(--brand-dark-600);
+
+      /* Dark Header */
+      --header-bg: var(--brand-dark-800);
+      --header-border: var(--brand-dark-600);
+      --header-text: var(--brand-dark-100);
+
+      /* Dark Cards */
+      --card-bg: var(--brand-dark-800);
+      --card-border: var(--brand-dark-600);
+      --card-hover: var(--brand-dark-700);
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--background);
+        color: var(--foreground);
+        min-height: 100vh;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 500,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    .icon-bold {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 600,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    /* Dark Theme Sidebar */
+    .dark-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--sidebar-bg);
+      border-right: 2px solid var(--sidebar-border);
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .dark-header {
+      background: linear-gradient(135deg, var(--sidebar-header), var(--brand-blue-normal-hover));
+      color: #FFFFFF;
+      border-bottom: 2px solid var(--sidebar-border);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-nav-item {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--sidebar-text);
+      margin: 3px 0;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+
+    .dark-nav-item:hover {
+      background: linear-gradient(135deg, var(--sidebar-hover), rgba(93, 95, 239, 0.1));
+      color: var(--brand-blue-light);
+      transform: translateX(6px);
+      border-color: var(--brand-blue-dark);
+      box-shadow: 0 4px 15px rgba(93, 95, 239, 0.2);
+    }
+
+    .dark-nav-item.active {
+      background: linear-gradient(135deg, var(--sidebar-active), var(--brand-blue-normal-hover));
+      color: #FFFFFF;
+      box-shadow: 0 6px 20px rgba(93, 95, 239, 0.4);
+      border-color: var(--brand-blue-light);
+    }
+
+    /* Dark Theme Header */
+    .dark-header-main {
+      background: linear-gradient(135deg, var(--header-bg), #1a1a2e);
+      color: var(--header-text);
+      border-bottom: 2px solid var(--header-border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-search {
+      background: var(--brand-dark-700);
+      border: 2px solid var(--brand-dark-600);
+      color: var(--brand-dark-100);
+      transition: all 0.3s ease;
+    }
+
+    .dark-search:focus {
+      background: var(--brand-dark-600);
+      border-color: var(--brand-blue-normal);
+      box-shadow: 0 0 0 4px rgba(93, 95, 239, 0.2);
+    }
+
+    .dark-search::placeholder {
+      color: var(--brand-dark-400);
+    }
+
+    /* Dark Theme Cards */
+    .dark-card {
+      background: linear-gradient(135deg, var(--card-bg), rgba(33, 37, 41, 0.8));
+      border: 2px solid var(--card-border);
+      border-radius: var(--radius);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(93, 95, 239, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .dark-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Dark Card Variants */
+    .dark-card-orange {
+      border-left: 4px solid var(--brand-orange-normal);
+    }
+
+    .dark-card-orange:hover {
+      background: linear-gradient(135deg, rgba(255, 149, 0, 0.1), var(--card-bg));
+      border-color: var(--brand-orange-normal);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 149, 0, 0.2);
+    }
+
+    .dark-card-blue {
+      border-left: 4px solid var(--brand-blue-normal);
+    }
+
+    .dark-card-blue:hover {
+      background: linear-gradient(135deg, rgba(93, 95, 239, 0.1), var(--card-bg));
+      border-color: var(--brand-blue-normal);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(93, 95, 239, 0.2);
+    }
+
+    .dark-card-purple {
+      border-left: 4px solid var(--brand-purple-normal);
+    }
+
+    .dark-card-purple:hover {
+      background: linear-gradient(135deg, rgba(204, 51, 255, 0.1), var(--card-bg));
+      border-color: var(--brand-purple-normal);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(204, 51, 255, 0.2);
+    }
+
+    .dark-card-green {
+      border-left: 4px solid var(--brand-green-normal);
+    }
+
+    .dark-card-green:hover {
+      background: linear-gradient(135deg, rgba(0, 204, 102, 0.1), var(--card-bg));
+      border-color: var(--brand-green-normal);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 204, 102, 0.2);
+    }
+
+    .dark-card-cyan {
+      border-left: 4px solid var(--brand-cyan-normal);
+    }
+
+    .dark-card-cyan:hover {
+      background: linear-gradient(135deg, rgba(51, 230, 255, 0.1), var(--card-bg));
+      border-color: var(--brand-cyan-normal);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(51, 230, 255, 0.2);
+    }
+
+    /* Dark Upgrade Section */
+    .dark-upgrade {
+      background: linear-gradient(135deg, rgba(255, 149, 0, 0.15), rgba(255, 149, 0, 0.05));
+      border: 2px solid var(--brand-orange-normal);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-upgrade::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 149, 0, 0.1), transparent);
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .dark-upgrade-btn {
+      background: linear-gradient(135deg, var(--brand-orange-normal), var(--brand-orange-normal-hover));
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 149, 0, 0.4);
+    }
+
+    .dark-upgrade-btn:hover {
+      background: linear-gradient(135deg, var(--brand-orange-normal-hover), var(--brand-orange-normal-active));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 149, 0, 0.5);
+    }
+
+    /* Dark Documents Section */
+    .dark-documents {
+      background: linear-gradient(135deg, var(--card-bg), rgba(51, 230, 255, 0.05));
+      border: 2px solid var(--brand-cyan-dark);
+      border-radius: var(--radius);
+    }
+
+    .dark-document-item {
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      margin: 2px;
+    }
+
+    .dark-document-item:hover {
+      background: linear-gradient(135deg, rgba(93, 95, 239, 0.1), rgba(51, 230, 255, 0.05));
+      transform: translateX(4px);
+    }
+
+    /* Dark Enhanced Buttons */
+    .dark-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: var(--primary-foreground);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .dark-btn:hover::before {
+      left: 100%;
+    }
+
+    .dark-btn:hover {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary-active));
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(93, 95, 239, 0.4);
+    }
+
+    /* Dark Notification */
+    .dark-notification {
+      color: var(--brand-blue-light);
+      transition: all 0.2s ease;
+    }
+
+    .dark-notification:hover {
+      color: var(--brand-orange-normal);
+      transform: scale(1.1);
+    }
+
+    /* Glow Effects for Dark Theme */
+    .glow-blue {
+      box-shadow: 0 0 20px rgba(93, 95, 239, 0.3);
+    }
+
+    .glow-orange {
+      box-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
+    }
+
+    /* Dark Theme Text Colors */
+    .text-brand-blue { color: var(--brand-blue-light); }
+    .text-brand-orange { color: var(--brand-orange-normal); }
+    .text-brand-green { color: var(--brand-green-normal); }
+    .text-brand-purple { color: var(--brand-purple-normal); }
+    .text-brand-cyan { color: var(--brand-cyan-normal); }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="flex min-h-screen">
+<aside class="w-64 flex-shrink-0 hidden lg:flex flex-col dark-sidebar">
+<div class="dark-header h-16 flex items-center px-6">
+<h1 class="text-xl font-bold">DocDirector</h1>
+<div class="ml-auto">
+<div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse glow-orange"></div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-2">
+<a class="dark-nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined icon-bold">home</span>
+          Home
+        </a>
+<a class="dark-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="dark-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined icon-bold">auto_awesome</span>
+          Templates
+        </a>
+<a class="dark-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined icon-bold">menu_book</span>
+          Knowledge Base
+        </a>
+<a class="dark-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined icon-bold">hub</span>
+          Integrations
+        </a>
+<a class="dark-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" href="#">
+<span class="material-symbols-outlined icon-bold">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="dark-upgrade p-4 relative">
+<h4 class="font-bold text-sm mb-1 relative z-10 text-brand-orange">Upgrade your plan</h4>
+<p class="text-xs mb-3 relative z-10 text-gray-400">Get more credits and unlock premium features.</p>
+<button class="dark-upgrade-btn w-full text-sm py-2 relative z-10">Upgrade Now ⚡</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="dark-header-main h-16 flex items-center justify-between px-6 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-gray-300 hover:text-white transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="dark-search border-none rounded-lg pl-10 pr-4 py-2 text-sm w-64" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="dark-notification">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full border-2 border-blue-400/30 glow-blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-3xl font-bold text-brand-blue">Welcome back, John!</h2>
+<p class="text-gray-400 text-lg">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="dark-card dark-card-orange p-6 flex flex-col justify-between cursor-pointer">
+<div>
+<div class="mb-4 p-3 rounded-xl inline-flex glow-orange" style="background: linear-gradient(135deg, var(--brand-orange-normal), var(--brand-orange-normal-hover));">
+<span class="material-symbols-outlined text-white text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold text-brand-orange">Start-up Pack</h3>
+<p class="mt-1 text-sm text-gray-400">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="dark-btn mt-4 text-sm py-2 self-start">Get Started →</button>
+</div>
+<div class="dark-card dark-card-blue p-6 flex flex-col justify-between cursor-pointer">
+<div>
+<div class="mb-4 p-3 rounded-xl inline-flex glow-blue" style="background: linear-gradient(135deg, var(--brand-blue-normal), var(--brand-blue-normal-hover));">
+<span class="material-symbols-outlined text-white text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold text-brand-blue">Build your own template</h3>
+<p class="mt-1 text-sm text-gray-400">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="dark-btn mt-4 text-sm py-2 self-start">Build Now →</button>
+</div>
+<div class="dark-card dark-card-purple p-6 flex flex-col justify-between cursor-pointer">
+<div>
+<div class="mb-4 p-3 rounded-xl inline-flex" style="background: linear-gradient(135deg, var(--brand-purple-normal), var(--brand-purple-normal-hover)); box-shadow: 0 0 20px rgba(204, 51, 255, 0.3);">
+<span class="material-symbols-outlined text-white text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold text-brand-purple">Ideas</h3>
+<p class="mt-1 text-sm text-gray-400">Get inspiration for new document templates.</p>
+</div>
+<button class="dark-btn mt-4 text-sm py-2 self-start">Explore Ideas →</button>
+</div>
+<div class="dark-card dark-card-green p-6 flex flex-col justify-between cursor-pointer">
+<div>
+<div class="mb-4 p-3 rounded-xl inline-flex" style="background: linear-gradient(135deg, var(--brand-green-normal), var(--brand-green-normal-hover)); box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);">
+<span class="material-symbols-outlined text-white text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold text-brand-green">Generate using Templates</h3>
+<p class="mt-1 text-sm text-gray-400">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="dark-btn mt-4 text-sm py-2 self-start">Browse Templates →</button>
+</div>
+<div class="dark-card dark-card-cyan p-6 flex flex-col justify-between cursor-pointer">
+<div>
+<div class="mb-4 p-3 rounded-xl inline-flex" style="background: linear-gradient(135deg, var(--brand-cyan-normal), var(--brand-cyan-normal-hover)); box-shadow: 0 0 20px rgba(51, 230, 255, 0.3);">
+<span class="material-symbols-outlined text-white text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold text-brand-cyan">My Documents</h3>
+<p class="mt-1 text-sm text-gray-400">Access and manage all your generated documents.</p>
+</div>
+<button class="dark-btn mt-4 text-sm py-2 self-start">View Documents →</button>
+</div>
+</div>
+<div class="dark-documents p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-brand-cyan">Recent Documents</h3>
+<a class="text-sm font-medium text-brand-blue hover:text-blue-300 transition-colors" href="#">View all →</a>
+</div>
+<div class="space-y-2">
+<div class="dark-document-item p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-brand-blue">description</span>
+<div>
+<p class="font-medium text-gray-100">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm text-gray-400">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-400 hidden md:block">Shared with 3 others</p>
+<button class="dark-btn px-4 py-2 text-sm">Open</button>
+</div>
+</div>
+<div class="dark-document-item p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-brand-green">description</span>
+<div>
+<p class="font-medium text-gray-100">Sales Process Optimization Guide</p>
+<p class="text-sm text-gray-400">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-400 hidden md:block">Only you</p>
+<button class="dark-btn px-4 py-2 text-sm">Open</button>
+</div>
+</div>
+<div class="dark-document-item p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-brand-purple">description</span>
+<div>
+<p class="font-medium text-gray-100">AI Buddy Onboarding Flow</p>
+<p class="text-sm text-gray-400">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-400 hidden md:block">Shared with 1 other</p>
+<button class="dark-btn px-4 py-2 text-sm">Open</button>
+</div>
+</div>
+<div class="dark-document-item p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-brand-orange">description</span>
+<div>
+<p class="font-medium text-gray-100">Q4 Financial Projections</p>
+<p class="text-sm text-gray-400">Edited 5 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-400 hidden md:block">Only you</p>
+<button class="dark-btn px-4 py-2 text-sm">Open</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

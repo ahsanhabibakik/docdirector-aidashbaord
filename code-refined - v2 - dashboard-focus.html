@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocDirector - Dashboard Focus</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      /* ========================================
+         DASHBOARD-FIRST COLOR SYSTEM
+         Professional, consistent, minimal
+         ======================================== */
+
+      /* Brand Primary - Limited Usage */
+      --brand-primary: #5D5FEF;
+      --brand-primary-hover: #4A4DE6;
+      --brand-primary-active: #373ADD;
+
+      /* Dashboard Grays - Primary Palette */
+      --neutral-white: #FFFFFF;
+      --neutral-50: #FAFBFC;
+      --neutral-100: #F4F5F7;
+      --neutral-200: #E4E7EC;
+      --neutral-300: #D0D5DD;
+      --neutral-400: #98A2B3;
+      --neutral-500: #667085;
+      --neutral-600: #475467;
+      --neutral-700: #344054;
+      --neutral-800: #1D2939;
+      --neutral-900: #101828;
+
+      /* Functional Colors - Minimal Set */
+      --success: #12B76A;
+      --warning: #F79009;
+      --error: #F04438;
+      --info: var(--brand-primary);
+
+      /* ========================================
+         DASHBOARD SEMANTIC COLORS
+         ======================================== */
+
+      /* Base Layout */
+      --bg-primary: var(--neutral-white);
+      --bg-secondary: var(--neutral-50);
+      --bg-tertiary: var(--neutral-100);
+
+      /* Text Hierarchy */
+      --text-primary: var(--neutral-900);
+      --text-secondary: var(--neutral-700);
+      --text-tertiary: var(--neutral-600);
+      --text-quaternary: var(--neutral-500);
+      --text-disabled: var(--neutral-400);
+
+      /* Borders & Dividers */
+      --border-primary: var(--neutral-200);
+      --border-secondary: var(--neutral-300);
+      --border-active: var(--brand-primary);
+
+      /* Interactive States - Consistent Across All */
+      --interactive-default: var(--neutral-white);
+      --interactive-hover: var(--neutral-50);
+      --interactive-active: var(--neutral-100);
+      --interactive-border-default: var(--border-primary);
+      --interactive-border-hover: var(--neutral-300);
+      --interactive-border-active: var(--brand-primary);
+
+      /* Card System - Unified */
+      --card-bg: var(--neutral-white);
+      --card-border: var(--border-primary);
+      --card-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+      --card-shadow-hover: 0 4px 8px rgba(16, 24, 40, 0.12);
+      --card-shadow-active: 0 2px 4px rgba(16, 24, 40, 0.15);
+
+      /* Button System */
+      --btn-primary-bg: var(--brand-primary);
+      --btn-primary-hover: var(--brand-primary-hover);
+      --btn-primary-active: var(--brand-primary-active);
+      --btn-primary-text: var(--neutral-white);
+
+      --btn-secondary-bg: var(--neutral-white);
+      --btn-secondary-hover: var(--neutral-50);
+      --btn-secondary-active: var(--neutral-100);
+      --btn-secondary-text: var(--text-secondary);
+      --btn-secondary-border: var(--border-primary);
+
+      /* Input System */
+      --input-bg: var(--neutral-white);
+      --input-border: var(--border-primary);
+      --input-focus-border: var(--brand-primary);
+      --input-focus-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+
+      --radius: 8px;
+      --radius-sm: 6px;
+      --radius-lg: 12px;
+    }
+
+    .dark {
+      /* Dark Dashboard Colors */
+      --bg-primary: var(--neutral-900);
+      --bg-secondary: var(--neutral-800);
+      --bg-tertiary: var(--neutral-700);
+
+      --text-primary: var(--neutral-100);
+      --text-secondary: var(--neutral-300);
+      --text-tertiary: var(--neutral-400);
+      --text-quaternary: var(--neutral-500);
+
+      --border-primary: var(--neutral-700);
+      --border-secondary: var(--neutral-600);
+
+      --interactive-default: var(--neutral-800);
+      --interactive-hover: var(--neutral-700);
+      --interactive-active: var(--neutral-600);
+      --interactive-border-default: var(--neutral-700);
+      --interactive-border-hover: var(--neutral-600);
+
+      --card-bg: var(--neutral-800);
+      --card-border: var(--neutral-700);
+      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+      --btn-secondary-bg: var(--neutral-700);
+      --btn-secondary-hover: var(--neutral-600);
+      --btn-secondary-active: var(--neutral-500);
+      --btn-secondary-text: var(--text-primary);
+      --btn-secondary-border: var(--border-primary);
+
+      --input-bg: var(--neutral-800);
+      --input-border: var(--neutral-600);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .icon-bold {
+      font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Consistent Component System */
+    .dashboard-layout {
+      min-height: 100vh;
+      background-color: var(--bg-secondary);
+    }
+
+    .sidebar {
+      background-color: var(--bg-primary);
+      border-right: 1px solid var(--border-primary);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      border-bottom: 1px solid var(--border-primary);
+      background-color: var(--bg-primary);
+    }
+
+    .nav-item {
+      color: var(--text-tertiary);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-item:hover {
+      background-color: var(--interactive-hover);
+      color: var(--text-secondary);
+    }
+
+    .nav-item.active {
+      background-color: var(--interactive-active);
+      color: var(--brand-primary);
+      font-weight: 500;
+    }
+
+    .main-header {
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-primary);
+      backdrop-filter: blur(8px);
+    }
+
+    .main-content {
+      background-color: var(--bg-secondary);
+    }
+
+    /* Universal Card Component */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card.interactive {
+      cursor: pointer;
+    }
+
+    .card.interactive:hover {
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--interactive-border-hover);
+      transform: translateY(-1px);
+    }
+
+    .card.interactive:active {
+      box-shadow: var(--card-shadow-active);
+      border-color: var(--interactive-border-active);
+      transform: translateY(0);
+    }
+
+    /* Button System */
+    .btn {
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--btn-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(93, 95, 239, 0.15);
+    }
+
+    .btn-primary:active {
+      background-color: var(--btn-primary-active);
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background-color: var(--btn-secondary-bg);
+      color: var(--btn-secondary-text);
+      border-color: var(--btn-secondary-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--btn-secondary-hover);
+      border-color: var(--interactive-border-hover);
+    }
+
+    .btn-secondary:active {
+      background-color: var(--btn-secondary-active);
+    }
+
+    /* Input System */
+    .input {
+      background-color: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--input-focus-border);
+      box-shadow: var(--input-focus-shadow);
+    }
+
+    .input::placeholder {
+      color: var(--text-quaternary);
+    }
+
+    /* List Items */
+    .list-item {
+      transition: all 0.15s ease-in-out;
+      border-radius: var(--radius-sm);
+    }
+
+    .list-item:hover {
+      background-color: var(--interactive-hover);
+    }
+
+    /* Icon Colors - Consistent with Brand */
+    .icon-neutral { color: var(--text-quaternary); }
+    .icon-primary { color: var(--brand-primary); }
+    .icon-success { color: var(--success); }
+    .icon-warning { color: var(--warning); }
+    .icon-error { color: var(--error); }
+
+    /* Feature Icons - Keep Distinct but Muted */
+    .feature-icon-orange { background-color: var(--warning); }
+    .feature-icon-blue { background-color: var(--brand-primary); }
+    .feature-icon-purple { background-color: #8B5CF6; }
+    .feature-icon-green { background-color: var(--success); }
+    .feature-icon-cyan { background-color: #0891B2; }
+
+    /* Upgrade Section */
+    .upgrade-card {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FBBF24 100%);
+      border: 1px solid var(--warning);
+    }
+
+    .upgrade-btn {
+      background-color: var(--warning);
+      color: white;
+      font-weight: 600;
+    }
+
+    .upgrade-btn:hover {
+      background-color: #EA580C;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(247, 144, 9, 0.25);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="dashboard-layout flex">
+<aside class="w-64 flex-shrink-0 hidden lg:flex flex-col sidebar">
+<div class="sidebar-header h-16 flex items-center px-6">
+<h1 class="text-xl font-bold" style="color: var(--brand-primary);">DocDirector</h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1">
+<a class="nav-item active flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">home</span>
+          Home
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">auto_awesome</span>
+          Templates
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">menu_book</span>
+          Knowledge Base
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">hub</span>
+          Integrations
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="upgrade-card card p-4">
+<h4 class="font-semibold text-sm text-amber-900 mb-1">Upgrade your plan</h4>
+<p class="text-xs text-amber-800 mb-3">Get more credits and unlock premium features.</p>
+<button class="upgrade-btn btn w-full text-sm py-2">Upgrade</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="main-header h-16 flex items-center justify-between px-6 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden icon-neutral hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 icon-neutral">search</span>
+<input class="input pl-10 pr-4 py-2 text-sm w-64" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="icon-neutral hover:icon-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+</div>
+</div>
+</header>
+<main class="main-content flex-1 p-6 lg:p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-bold" style="color: var(--text-primary);">Welcome back, John!</h2>
+<p style="color: var(--text-secondary);">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="card interactive p-6 flex flex-col justify-between">
+<div>
+<div class="feature-icon-orange mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold" style="color: var(--text-primary);">Start-up Pack</h3>
+<p class="mt-1 text-sm" style="color: var(--text-secondary);">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Get Started →</button>
+</div>
+<div class="card interactive p-6 flex flex-col justify-between">
+<div>
+<div class="feature-icon-blue mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold" style="color: var(--text-primary);">Build your own template</h3>
+<p class="mt-1 text-sm" style="color: var(--text-secondary);">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Build Now →</button>
+</div>
+<div class="card interactive p-6 flex flex-col justify-between">
+<div>
+<div class="feature-icon-purple mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold" style="color: var(--text-primary);">Ideas</h3>
+<p class="mt-1 text-sm" style="color: var(--text-secondary);">Get inspiration for new document templates.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Explore Ideas →</button>
+</div>
+<div class="card interactive p-6 flex flex-col justify-between">
+<div>
+<div class="feature-icon-green mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold" style="color: var(--text-primary);">Generate using Templates</h3>
+<p class="mt-1 text-sm" style="color: var(--text-secondary);">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Browse Templates →</button>
+</div>
+<div class="card interactive p-6 flex flex-col justify-between">
+<div>
+<div class="feature-icon-cyan mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold" style="color: var(--text-primary);">My Documents</h3>
+<p class="mt-1 text-sm" style="color: var(--text-secondary);">Access and manage all your generated documents.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">View Documents →</button>
+</div>
+</div>
+<div class="card p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold" style="color: var(--text-primary);">Recent Documents</h3>
+<a class="text-sm font-medium icon-primary hover:opacity-80" href="#">View all →</a>
+</div>
+<div class="space-y-1">
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined icon-neutral">description</span>
+<div>
+<p class="font-medium" style="color: var(--text-primary);">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm" style="color: var(--text-tertiary);">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm hidden md:block" style="color: var(--text-quaternary);">Shared with 3 others</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined icon-neutral">description</span>
+<div>
+<p class="font-medium" style="color: var(--text-primary);">Sales Process Optimization Guide</p>
+<p class="text-sm" style="color: var(--text-tertiary);">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm hidden md:block" style="color: var(--text-quaternary);">Only you</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined icon-neutral">description</span>
+<div>
+<p class="font-medium" style="color: var(--text-primary);">AI Buddy Onboarding Flow</p>
+<p class="text-sm" style="color: var(--text-tertiary);">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm hidden md:block" style="color: var(--text-quaternary);">Shared with 1 other</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

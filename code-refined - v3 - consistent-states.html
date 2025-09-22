@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocDirector - Consistent States</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      /* ========================================
+         CONSISTENT INTERACTIVE STATES SYSTEM
+         Same hover/active behavior across all elements
+         ======================================== */
+
+      /* Brand Core */
+      --brand-blue: #5D5FEF;
+      --brand-blue-hover: #4A4DE6;
+      --brand-blue-active: #373ADD;
+
+      /* Neutral Palette */
+      --white: #FFFFFF;
+      --gray-25: #FCFCFD;
+      --gray-50: #F9FAFB;
+      --gray-100: #F2F4F7;
+      --gray-200: #EAECF0;
+      --gray-300: #D0D5DD;
+      --gray-400: #98A2B3;
+      --gray-500: #667085;
+      --gray-600: #475467;
+      --gray-700: #344054;
+      --gray-800: #182230;
+      --gray-900: #101828;
+
+      /* Functional */
+      --success: #039855;
+      --warning: #DC6803;
+      --error: #D92D20;
+
+      /* ========================================
+         UNIVERSAL INTERACTIVE STATES
+         Same states applied to all interactive elements
+         ======================================== */
+
+      /* Default State */
+      --state-default-bg: var(--white);
+      --state-default-border: var(--gray-200);
+      --state-default-text: var(--gray-700);
+      --state-default-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+
+      /* Hover State - Consistent Across All */
+      --state-hover-bg: var(--gray-25);
+      --state-hover-border: var(--gray-300);
+      --state-hover-text: var(--gray-800);
+      --state-hover-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+      --state-hover-transform: translateY(-1px);
+
+      /* Active State - Consistent Across All */
+      --state-active-bg: var(--gray-50);
+      --state-active-border: var(--brand-blue);
+      --state-active-text: var(--gray-900);
+      --state-active-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+      --state-active-transform: translateY(0);
+
+      /* Focus State */
+      --state-focus-border: var(--brand-blue);
+      --state-focus-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+
+      /* Primary Elements */
+      --primary-default: var(--brand-blue);
+      --primary-hover: var(--brand-blue-hover);
+      --primary-active: var(--brand-blue-active);
+      --primary-text: var(--white);
+
+      /* ========================================
+         LAYOUT COLORS
+         ======================================== */
+
+      --layout-bg: var(--gray-25);
+      --sidebar-bg: var(--white);
+      --sidebar-border: var(--gray-200);
+      --header-bg: var(--white);
+      --header-border: var(--gray-200);
+      --card-bg: var(--white);
+
+      /* Text Hierarchy */
+      --text-primary: var(--gray-900);
+      --text-secondary: var(--gray-700);
+      --text-tertiary: var(--gray-600);
+      --text-placeholder: var(--gray-500);
+      --text-disabled: var(--gray-400);
+
+      --radius: 8px;
+      --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+      --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.1);
+      --shadow-md: 0 4px 8px rgba(16, 24, 40, 0.1);
+      --shadow-lg: 0 10px 15px rgba(16, 24, 40, 0.1);
+    }
+
+    .dark {
+      --layout-bg: var(--gray-900);
+      --sidebar-bg: var(--gray-800);
+      --sidebar-border: var(--gray-700);
+      --header-bg: var(--gray-800);
+      --header-border: var(--gray-700);
+      --card-bg: var(--gray-800);
+
+      --state-default-bg: var(--gray-800);
+      --state-default-border: var(--gray-700);
+      --state-default-text: var(--gray-300);
+
+      --state-hover-bg: var(--gray-700);
+      --state-hover-border: var(--gray-600);
+      --state-hover-text: var(--gray-200);
+
+      --state-active-bg: var(--gray-600);
+      --state-active-border: var(--brand-blue);
+      --state-active-text: var(--white);
+
+      --text-primary: var(--gray-100);
+      --text-secondary: var(--gray-300);
+      --text-tertiary: var(--gray-400);
+      --text-placeholder: var(--gray-500);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--layout-bg);
+      color: var(--text-primary);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .icon-bold {
+      font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ========================================
+       UNIVERSAL INTERACTIVE COMPONENT
+       Same behavior for all clickable elements
+       ======================================== */
+
+    .interactive {
+      background-color: var(--state-default-bg);
+      border: 1px solid var(--state-default-border);
+      color: var(--state-default-text);
+      box-shadow: var(--state-default-shadow);
+      border-radius: var(--radius);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .interactive:hover {
+      background-color: var(--state-hover-bg);
+      border-color: var(--state-hover-border);
+      color: var(--state-hover-text);
+      box-shadow: var(--state-hover-shadow);
+      transform: var(--state-hover-transform);
+    }
+
+    .interactive:active {
+      background-color: var(--state-active-bg);
+      border-color: var(--state-active-border);
+      color: var(--state-active-text);
+      box-shadow: var(--state-active-shadow);
+      transform: var(--state-active-transform);
+    }
+
+    .interactive:focus-visible {
+      outline: none;
+      border-color: var(--state-focus-border);
+      box-shadow: var(--state-focus-shadow);
+    }
+
+    /* Primary Interactive Elements */
+    .interactive-primary {
+      background-color: var(--primary-default);
+      border-color: var(--primary-default);
+      color: var(--primary-text);
+    }
+
+    .interactive-primary:hover {
+      background-color: var(--primary-hover);
+      border-color: var(--primary-hover);
+      color: var(--primary-text);
+      transform: var(--state-hover-transform);
+      box-shadow: 0 4px 8px rgba(93, 95, 239, 0.15);
+    }
+
+    .interactive-primary:active {
+      background-color: var(--primary-active);
+      border-color: var(--primary-active);
+      color: var(--primary-text);
+      transform: var(--state-active-transform);
+      box-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+    }
+
+    /* Layout Components */
+    .sidebar {
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--sidebar-border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .header {
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+      backdrop-filter: blur(8px);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--state-default-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xs);
+    }
+
+    /* Navigation Items - Use Interactive System */
+    .nav-item {
+      background-color: transparent;
+      border: 1px solid transparent;
+      color: var(--text-tertiary);
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .nav-item:hover {
+      background-color: var(--state-hover-bg);
+      color: var(--text-secondary);
+    }
+
+    .nav-item.active {
+      background-color: var(--state-active-bg);
+      color: var(--brand-blue);
+      border-color: var(--brand-blue);
+      font-weight: 500;
+    }
+
+    /* Cards - Use Interactive System */
+    .feature-card {
+      background-color: var(--state-default-bg);
+      border: 1px solid var(--state-default-border);
+      box-shadow: var(--state-default-shadow);
+      border-radius: var(--radius);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .feature-card:hover {
+      background-color: var(--state-hover-bg);
+      border-color: var(--state-hover-border);
+      box-shadow: var(--state-hover-shadow);
+      transform: var(--state-hover-transform);
+    }
+
+    .feature-card:active {
+      background-color: var(--state-active-bg);
+      border-color: var(--state-active-border);
+      box-shadow: var(--state-active-shadow);
+      transform: var(--state-active-transform);
+    }
+
+    /* List Items - Use Interactive System */
+    .list-item {
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .list-item:hover {
+      background-color: var(--state-hover-bg);
+    }
+
+    /* Buttons - Use Interactive System */
+    .btn {
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-default);
+      color: var(--primary-text);
+      border-color: var(--primary-default);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      border-color: var(--primary-hover);
+      transform: var(--state-hover-transform);
+      box-shadow: 0 4px 8px rgba(93, 95, 239, 0.15);
+    }
+
+    .btn-primary:active {
+      background-color: var(--primary-active);
+      border-color: var(--primary-active);
+      transform: var(--state-active-transform);
+      box-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+    }
+
+    .btn-secondary {
+      background-color: var(--state-default-bg);
+      color: var(--state-default-text);
+      border-color: var(--state-default-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--state-hover-bg);
+      color: var(--state-hover-text);
+      border-color: var(--state-hover-border);
+      transform: var(--state-hover-transform);
+    }
+
+    .btn-secondary:active {
+      background-color: var(--state-active-bg);
+      color: var(--state-active-text);
+      border-color: var(--state-active-border);
+      transform: var(--state-active-transform);
+    }
+
+    /* Input - Use Interactive System */
+    .input {
+      background-color: var(--state-default-bg);
+      border: 1px solid var(--state-default-border);
+      color: var(--text-primary);
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--state-focus-border);
+      box-shadow: var(--state-focus-shadow);
+    }
+
+    .input::placeholder {
+      color: var(--text-placeholder);
+    }
+
+    /* Feature Icons - Keep Original Colors for Recognition */
+    .icon-container {
+      border-radius: var(--radius);
+    }
+
+    .icon-orange { background-color: var(--warning); }
+    .icon-blue { background-color: var(--brand-blue); }
+    .icon-purple { background-color: #8B5CF6; }
+    .icon-green { background-color: var(--success); }
+    .icon-cyan { background-color: #0891B2; }
+
+    /* Upgrade Section */
+    .upgrade-section {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FBBF24 100%);
+      border: 1px solid var(--warning);
+      border-radius: var(--radius);
+    }
+
+    .upgrade-btn {
+      background-color: var(--warning);
+      color: white;
+      border: 1px solid var(--warning);
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .upgrade-btn:hover {
+      background-color: #B45309;
+      border-color: #B45309;
+      transform: var(--state-hover-transform);
+      box-shadow: 0 4px 8px rgba(220, 104, 3, 0.15);
+    }
+
+    .upgrade-btn:active {
+      background-color: #92400E;
+      border-color: #92400E;
+      transform: var(--state-active-transform);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="flex min-h-screen">
+<aside class="w-64 flex-shrink-0 hidden lg:flex flex-col sidebar">
+<div class="h-16 flex items-center px-6 border-b border-gray-200">
+<h1 class="text-xl font-bold" style="color: var(--brand-blue);">DocDirector</h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1">
+<a class="nav-item active flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">home</span>
+          Home
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">auto_awesome</span>
+          Templates
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">menu_book</span>
+          Knowledge Base
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">hub</span>
+          Integrations
+        </a>
+<a class="nav-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="upgrade-section p-4">
+<h4 class="font-semibold text-sm text-amber-900 mb-1">Upgrade your plan</h4>
+<p class="text-xs text-amber-800 mb-3">Get more credits and unlock premium features.</p>
+<button class="upgrade-btn w-full text-sm py-2">Upgrade</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="header h-16 flex items-center justify-between px-6 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-gray-500 hover:text-gray-700 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="input pl-10 pr-4 py-2 text-sm w-64" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-gray-500 hover:text-gray-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-900">Welcome back, John!</h2>
+<p class="text-gray-600">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="feature-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-container icon-orange mb-4 p-3 inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Start-up Pack</h3>
+<p class="mt-1 text-sm text-gray-600">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Get Started →</button>
+</div>
+<div class="feature-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-container icon-blue mb-4 p-3 inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Build your own template</h3>
+<p class="mt-1 text-sm text-gray-600">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Build Now →</button>
+</div>
+<div class="feature-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-container icon-purple mb-4 p-3 inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Ideas</h3>
+<p class="mt-1 text-sm text-gray-600">Get inspiration for new document templates.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Explore Ideas →</button>
+</div>
+<div class="feature-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-container icon-green mb-4 p-3 inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Generate using Templates</h3>
+<p class="mt-1 text-sm text-gray-600">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">Browse Templates →</button>
+</div>
+<div class="feature-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-container icon-cyan mb-4 p-3 inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">My Documents</h3>
+<p class="mt-1 text-sm text-gray-600">Access and manage all your generated documents.</p>
+</div>
+<button class="btn btn-primary mt-4 text-sm py-2 px-4 self-start">View Documents →</button>
+</div>
+</div>
+<div class="card p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-gray-900">Recent Documents</h3>
+<a class="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors" href="#">View all →</a>
+</div>
+<div class="space-y-1">
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm text-gray-500">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Shared with 3 others</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">Sales Process Optimization Guide</p>
+<p class="text-sm text-gray-500">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Only you</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="list-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">AI Buddy Onboarding Flow</p>
+<p class="text-sm text-gray-500">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Shared with 1 other</p>
+<button class="btn btn-secondary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

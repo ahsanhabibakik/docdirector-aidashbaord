@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Web App Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --background: #FFFFFF;
+      --foreground: #0F172A;
+      --card: #FFFFFF;
+      --card-foreground: #0F172A;
+      --popover: #FFFFFF;
+      --popover-foreground: #0F172A;
+      --primary: #6D28D9;
+      --primary-foreground: #F9FAFB;
+      --secondary: #F1F5F9;
+      --secondary-foreground: #0F172A;
+      --muted: #F1F5F9;
+      --muted-foreground: #64748B;
+      --accent: #F1F5F9;
+      --accent-foreground: #0F172A;
+      --destructive: #EF4444;
+      --destructive-foreground: #F9FAFB;
+      --border: #E2E8F0;
+      --input: #E2E8F0;
+      --ring: #6D28D9;
+      --radius: 0.5rem;
+    }
+    .dark {
+      --background: #020617;
+      --foreground: #F8FAFC;
+      --card: #020617;
+      --card-foreground: #F8FAFC;
+      --popover: #020617;
+      --popover-foreground: #F8FAFC;
+      --primary: #8B5CF6;
+      --primary-foreground: #F9FAFB;
+      --secondary: #1E293B;
+      --secondary-foreground: #F8FAFC;
+      --muted: #1E293B;
+      --muted-foreground: #94A3B8;
+      --accent: #1E293B;
+      --accent-foreground: #F8FAFC;
+      --destructive: #F87171;
+      --destructive-foreground: #F9FAFB;
+      --border: #1E293B;
+      --input: #1E293B;
+      --ring: #8B5CF6;
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background">
+<div class="flex min-h-screen">
+<aside class="w-64 flex-shrink-0 bg-background border-r border-border hidden lg:flex flex-col">
+<div class="h-16 flex items-center px-6 border-b border-border">
+<h1 class="text-xl font-bold text-foreground">AI Dashboard</h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium bg-secondary text-secondary-foreground" href="#">
+<span class="material-symbols-outlined">home</span>
+          Home
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+          Templates
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<span class="material-symbols-outlined">hub</span>
+          Integrations
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-secondary-foreground" href="#">
+<span class="material-symbols-outlined">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="p-4 rounded-lg bg-secondary">
+<h4 class="font-semibold text-sm text-secondary-foreground mb-1">Upgrade your plan</h4>
+<p class="text-xs text-muted-foreground mb-3">Get more credits and unlock premium features.</p>
+<button class="w-full bg-primary text-primary-foreground text-sm font-medium py-2 rounded-md hover:bg-primary/90">Upgrade</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="h-16 flex items-center justify-between px-6 border-b border-border bg-background/95 backdrop-blur-sm sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">search</span>
+<input class="bg-secondary border-none rounded-md pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-muted-foreground hover:text-foreground">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+<div>
+<p class="text-sm font-medium text-foreground">John Doe</p>
+<p class="text-xs text-muted-foreground">johndoe@example.com</p>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-foreground">Welcome back, John!</h2>
+<p class="text-muted-foreground">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-card border border-border rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div>
+<div class="mb-4 bg-yellow-100 dark:bg-yellow-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400 text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Start-up Pack</h3>
+<p class="mt-1 text-sm text-muted-foreground">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Get Started <span aria-hidden="true">→</span></button>
+</div>
+<div class="bg-card border border-border rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div>
+<div class="mb-4 bg-blue-100 dark:bg-blue-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-blue-500 dark:text-blue-400 text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Build your own template</h3>
+<p class="mt-1 text-sm text-muted-foreground">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Build Now <span aria-hidden="true">→</span></button>
+</div>
+<div class="bg-card border border-border rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div>
+<div class="mb-4 bg-purple-100 dark:bg-purple-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-purple-500 dark:text-purple-400 text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Ideas List</h3>
+<p class="mt-1 text-sm text-muted-foreground">Get inspiration for new document templates.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Explore Ideas <span aria-hidden="true">→</span></button>
+</div>
+<div class="bg-card border border-border rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div>
+<div class="mb-4 bg-green-100 dark:bg-green-900/50 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-green-500 dark:text-green-400 text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">Generate using Templates</h3>
+<p class="mt-1 text-sm text-muted-foreground">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">Browse Templates <span aria-hidden="true">→</span></button>
+</div>
+<div class="bg-card border border-border rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
+<div>
+<div class="mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold text-card-foreground">My Documents</h3>
+<p class="mt-1 text-sm text-muted-foreground">Access and manage all your generated documents.</p>
+</div>
+<button class="mt-4 text-sm font-semibold text-primary hover:underline self-start">View Documents <span aria-hidden="true">→</span></button>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-foreground">Recent Documents</h3>
+<a class="text-sm font-medium text-primary hover:underline" href="#">View all</a>
+</div>
+<div class="bg-card border border-border rounded-lg">
+<ul class="divide-y divide-border">
+<li class="p-4 flex items-center justify-between hover:bg-secondary/50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm text-muted-foreground">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Shared with 3 others</p>
+<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary/50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Sales Process Optimization Guide</p>
+<p class="text-sm text-muted-foreground">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Only you</p>
+<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary/50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">AI Buddy Onboarding Flow</p>
+<p class="text-sm text-muted-foreground">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Shared with 1 other</p>
+<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+</div>
+</li>
+<li class="p-4 flex items-center justify-between hover:bg-secondary/50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-muted-foreground">description</span>
+<div>
+<p class="font-medium text-card-foreground">Q4 Financial Projections</p>
+<p class="text-sm text-muted-foreground">Edited 5 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-muted-foreground hidden md:block">Only you</p>
+<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors">Open</button>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

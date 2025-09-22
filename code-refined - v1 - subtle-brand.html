@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocDirector - Subtle Brand</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      /* ========================================
+         DOCDIRECTOR BRAND COLORS - REFINED
+         Subtle, dashboard-appropriate implementation
+         ======================================== */
+
+      /* PRIMARY BRAND BLUE - Main Identity */
+      --brand-blue-50: #F8F9FF;              /* Lightest blue tint */
+      --brand-blue-100: #E8E9FF;             /* Very light blue */
+      --brand-blue-200: #D4D7FF;             /* Light hover state */
+      --brand-blue-300: #C1C5FF;             /* Active state */
+      --brand-blue-500: #5D5FEF;             /* Primary brand */
+      --brand-blue-600: #4A4DE6;             /* Primary hover */
+      --brand-blue-700: #373ADD;             /* Primary active */
+
+      /* NEUTRAL GRAYS - Dashboard Foundation */
+      --gray-50: #F9FAFB;                    /* Background tints */
+      --gray-100: #F3F4F6;                   /* Light backgrounds */
+      --gray-200: #E5E7EB;                   /* Borders */
+      --gray-300: #D1D5DB;                   /* Disabled states */
+      --gray-400: #9CA3AF;                   /* Placeholders */
+      --gray-500: #6B7280;                   /* Secondary text */
+      --gray-600: #4B5563;                   /* Primary text */
+      --gray-700: #374151;                   /* Headings */
+      --gray-800: #1F2937;                   /* Dark text */
+      --gray-900: #111827;                   /* Darkest text */
+
+      /* ACCENT COLORS - Minimal Usage */
+      --accent-orange: #F59E0B;              /* Upgrade/warning */
+      --accent-green: #10B981;               /* Success states */
+      --accent-red: #EF4444;                 /* Error states */
+
+      /* ========================================
+         SEMANTIC DASHBOARD COLORS
+         Consistent, professional color system
+         ======================================== */
+
+      /* Light Theme - Dashboard Focused */
+      --background: #FFFFFF;
+      --background-secondary: var(--gray-50);
+      --foreground: var(--gray-800);
+      --foreground-secondary: var(--gray-600);
+      --foreground-muted: var(--gray-500);
+
+      /* Card System */
+      --card-background: #FFFFFF;
+      --card-border: var(--gray-200);
+      --card-hover-bg: var(--brand-blue-50);
+      --card-hover-border: var(--brand-blue-200);
+      --card-active-bg: var(--brand-blue-100);
+      --card-active-border: var(--brand-blue-300);
+
+      /* Interactive Elements */
+      --primary: var(--brand-blue-500);
+      --primary-hover: var(--brand-blue-600);
+      --primary-active: var(--brand-blue-700);
+      --primary-foreground: #FFFFFF;
+
+      /* Sidebar */
+      --sidebar-background: #FFFFFF;
+      --sidebar-border: var(--gray-200);
+      --sidebar-item-hover: var(--brand-blue-50);
+      --sidebar-item-active: var(--brand-blue-100);
+      --sidebar-text: var(--gray-600);
+      --sidebar-text-active: var(--brand-blue-600);
+
+      /* Borders & Inputs */
+      --border: var(--gray-200);
+      --border-hover: var(--brand-blue-200);
+      --input-background: var(--gray-50);
+      --input-border: var(--gray-200);
+      --input-focus: var(--brand-blue-200);
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      /* Dark Theme - Refined */
+      --background: #0F1419;
+      --background-secondary: #1A1F29;
+      --foreground: #E5E7EB;
+      --foreground-secondary: #D1D5DB;
+      --foreground-muted: #9CA3AF;
+
+      --card-background: #1F2937;
+      --card-border: #374151;
+      --card-hover-bg: rgba(93, 95, 239, 0.05);
+      --card-hover-border: rgba(93, 95, 239, 0.2);
+      --card-active-bg: rgba(93, 95, 239, 0.1);
+      --card-active-border: rgba(93, 95, 239, 0.3);
+
+      --sidebar-background: #1F2937;
+      --sidebar-border: #374151;
+      --sidebar-item-hover: rgba(93, 95, 239, 0.1);
+      --sidebar-item-active: rgba(93, 95, 239, 0.15);
+      --sidebar-text: #D1D5DB;
+      --sidebar-text-active: var(--brand-blue-500);
+
+      --border: #374151;
+      --border-hover: rgba(93, 95, 239, 0.3);
+      --input-background: #374151;
+      --input-border: #4B5563;
+      --input-focus: var(--brand-blue-500);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .icon-bold {
+      font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: var(--sidebar-background);
+      border-right: 1px solid var(--sidebar-border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-item {
+      color: var(--sidebar-text);
+      transition: all 0.15s ease-in-out;
+      border-radius: 6px;
+    }
+
+    .sidebar-item:hover {
+      background-color: var(--sidebar-item-hover);
+      color: var(--sidebar-text-active);
+    }
+
+    .sidebar-item.active {
+      background-color: var(--sidebar-item-active);
+      color: var(--sidebar-text-active);
+      font-weight: 500;
+    }
+
+    /* Card System - Consistent States */
+    .dashboard-card {
+      background-color: var(--card-background);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+    .dashboard-card:hover {
+      background-color: var(--card-hover-bg);
+      border-color: var(--card-hover-border);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(93, 95, 239, 0.08);
+    }
+
+    .dashboard-card:active {
+      background-color: var(--card-active-bg);
+      border-color: var(--card-active-border);
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(93, 95, 239, 0.12);
+    }
+
+    /* Icon Containers - Keep Original Colors */
+    .icon-orange { background-color: var(--accent-orange); }
+    .icon-blue { background-color: var(--brand-blue-500); }
+    .icon-purple { background-color: #8B5CF6; }
+    .icon-green { background-color: var(--accent-green); }
+    .icon-cyan { background-color: #06B6D4; }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(93, 95, 239, 0.25);
+    }
+
+    .btn-primary:active {
+      background-color: var(--primary-active);
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(93, 95, 239, 0.3);
+    }
+
+    /* Input Elements */
+    .input-field {
+      background-color: var(--input-background);
+      border: 1px solid var(--input-border);
+      color: var(--foreground);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1);
+      background-color: var(--background);
+    }
+
+    /* Document List Items */
+    .document-item {
+      transition: all 0.15s ease-in-out;
+      border-radius: 6px;
+    }
+
+    .document-item:hover {
+      background-color: var(--card-hover-bg);
+    }
+
+    /* Upgrade Section */
+    .upgrade-section {
+      background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+      border: 1px solid #F59E0B;
+      border-radius: 8px;
+    }
+
+    .upgrade-btn {
+      background-color: var(--accent-orange);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .upgrade-btn:hover {
+      background-color: #D97706;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="flex min-h-screen">
+<aside class="w-64 flex-shrink-0 hidden lg:flex flex-col sidebar">
+<div class="h-16 flex items-center px-6 border-b border-gray-200">
+<h1 class="text-xl font-bold" style="color: var(--brand-blue-600);">DocDirector</h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1">
+<a class="sidebar-item active flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">home</span>
+          Home
+        </a>
+<a class="sidebar-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined">description</span>
+          My Documents
+        </a>
+<a class="sidebar-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">auto_awesome</span>
+          Templates
+        </a>
+<a class="sidebar-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">menu_book</span>
+          Knowledge Base
+        </a>
+<a class="sidebar-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">hub</span>
+          Integrations
+        </a>
+<a class="sidebar-item flex items-center gap-3 px-3 py-2 text-sm" href="#">
+<span class="material-symbols-outlined icon-bold">settings</span>
+          Settings
+        </a>
+</nav>
+<div class="px-4 py-6 mt-auto">
+<div class="upgrade-section p-4">
+<h4 class="font-semibold text-sm text-amber-800 mb-1">Upgrade your plan</h4>
+<p class="text-xs text-amber-700 mb-3">Get more credits and unlock premium features.</p>
+<button class="upgrade-btn w-full text-sm py-2">Upgrade</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="h-16 flex items-center justify-between px-6 border-b border-gray-200 bg-white sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-gray-500 hover:text-gray-700">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="input-field border-none rounded-md pl-10 pr-4 py-2 text-sm w-64" placeholder="Search documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-gray-500 hover:text-gray-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmCMKAXdT8UfW-D2Uu_yVBBQBQAEKv9ePdn-QCtbZpOodJzlRJY32YYI0LhtfbjgNb3LGPa8EZQPF_-sapc4q707S81UysuGTQk04DmVpBS35X2u1wHbYMVf9aWqLL3HW1PIlMHioLOBIkWVzaCczBuvq4Eq52u1lbfH11V0YWbQG8Kl9r19qYPxpe2sEehhQ-EmxvPv45o-EbXjrjDmgetoR0ksWeir8FoeoSEb89HBSotfNC5XpEfo52l75NnygjYisRyFBmldY"/>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-900">Welcome back, John!</h2>
+<p class="text-gray-600">Here's what you can do today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="dashboard-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-orange mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Start-up Pack</h3>
+<p class="mt-1 text-sm text-gray-600">Vetted template to create T1 documents for a startup.</p>
+</div>
+<button class="btn-primary mt-4 text-sm py-2 self-start px-4">Get Started →</button>
+</div>
+<div class="dashboard-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-blue mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">add_circle</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Build your own template</h3>
+<p class="mt-1 text-sm text-gray-600">Create desired documents and save prompts as a template.</p>
+</div>
+<button class="btn-primary mt-4 text-sm py-2 self-start px-4">Build Now →</button>
+</div>
+<div class="dashboard-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-purple mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">lightbulb</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Ideas</h3>
+<p class="mt-1 text-sm text-gray-600">Get inspiration for new document templates.</p>
+</div>
+<button class="btn-primary mt-4 text-sm py-2 self-start px-4">Explore Ideas →</button>
+</div>
+<div class="dashboard-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-green mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">auto_awesome_mosaic</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Generate using Templates</h3>
+<p class="mt-1 text-sm text-gray-600">Professional templates for instant, high-quality results.</p>
+</div>
+<button class="btn-primary mt-4 text-sm py-2 self-start px-4">Browse Templates →</button>
+</div>
+<div class="dashboard-card p-6 flex flex-col justify-between">
+<div>
+<div class="icon-cyan mb-4 p-3 rounded-lg inline-flex">
+<span class="material-symbols-outlined text-white text-3xl">folder_open</span>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">My Documents</h3>
+<p class="mt-1 text-sm text-gray-600">Access and manage all your generated documents.</p>
+</div>
+<button class="btn-primary mt-4 text-sm py-2 self-start px-4">View Documents →</button>
+</div>
+</div>
+<div class="dashboard-card p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-gray-900">Recent Documents</h3>
+<a class="text-sm font-medium text-blue-600 hover:text-blue-700" href="#">View all →</a>
+</div>
+<div class="space-y-1">
+<div class="document-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">Marketing Strategy and Campaign Plan</p>
+<p class="text-sm text-gray-500">Edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Shared with 3 others</p>
+<button class="btn-primary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="document-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">Sales Process Optimization Guide</p>
+<p class="text-sm text-gray-500">Edited 1 day ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Only you</p>
+<button class="btn-primary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+<div class="document-item p-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-gray-400">description</span>
+<div>
+<p class="font-medium text-gray-900">AI Buddy Onboarding Flow</p>
+<p class="text-sm text-gray-500">Edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-sm text-gray-500 hidden md:block">Shared with 1 other</p>
+<button class="btn-primary px-3 py-1 text-sm">Open</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>
